@@ -14,7 +14,15 @@
 
 - E' possibile riportare in questa sezione i **requisiti **copiati dal documento di specifica, oppure semplicemente riassumerne gli aspetti più importanti.
   Vanno quindi (eventualmente) discusse tutte le scelte progettuali relative al dominio, le ambiguità e il modo in cui sono state risolte.
+- Definizione della richiesta di acquisto. L’ordinante dovrà selezionare una categoria (ad esempio PC Desktop, Notebook, Scrivania,...) che identifichi la tipologia di prodotto da acquistare tra quelle note al sistema (opzionalmente le categorie potranno avere una struttura ad albero, ad esempio Informatica > Computer > Notebook). Ogni categoria di prodotto avrà associate una serie di caratteristiche specifiche (ad esempio quantità di RAM e tipo di CPU per un PC, ecc.), sempre definite nel sistema ed eventualmente aggiornabili. L'ordinante, per completare la propria richiesta di acquisito, dovrà quindi inserire i valori di tutte le caratteristiche desiderate relative alla categoria di prodotto selezionata (per ogni caratteristica sarà comunque sempre prevista l'opzione indifferente). Sarà presente anche uno spazio note per aggiungere ogni caratteristica peculiare non annoverata tra quelle standard.
 
+- Ricerca del prodotto da parte del personale tecnico. Un membro del personale sarà associato alla richiesta di acquisto definita al punto 1, diventandone il tecnico incaricato. Il tecnico incaricato potrà visionare la categoria e le caratteristiche richieste dall'ordinante e cercherà (esternamente al sistema) un prodotto effettivo da ordinare (che chiameremo prodotto candidato), associandone poi la descrizione (che comprenderà almeno nome produttore, nome prodotto, codice prodotto, prezzo, URL di approfondimento e un campo note) alla richiesta.
+
+- Revisione del prodotto candidato. L'ordinante prenderà visione del prodotto candidato e potrà approvarlo o respingerlo, fornendo in questo caso una motivazione. In caso di richiesta respinta, il processo riprenderà dal passo 2, considerando che il tecnico incaricato sarà sempre lo stesso. La motivazione del rifiuto sarà mostrata assieme alle informazioni della richiesta, e il tecnico incaricato potrà modificare il prodotto candidato e inoltrarlo nuovamente all'ordinante.
+
+- Esecuzione dell'ordine. Nel caso in cui l'ordinante approvi la scelta del prodotto candidato al passo 3, il personale tecnico procederà all'acquisto (questa parte non sarà gestita dal nostro applicativo).
+
+- Consegna e verifica del prodotto. Quando il prodotto sarà consegnato (prima o poi!), l'ordinante dovrà chiudere la relativa richiesta di acquisto indicando se il prodotto ricevuto è stato accettato, respinto perché non conforme oppure respinto perché non funzionante.
 - E' possibile infine inserire qui un glossario che riporta tutti gli oggetti di dominio individuati, con la loro semantica, i loro eventuali sinonimi e le loro proprietà.
 
 ## Progettazione concettuale
