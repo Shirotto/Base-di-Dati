@@ -24,12 +24,14 @@
 - Esecuzione dell'ordine. Nel caso in cui l'ordinante approvi la scelta del prodotto candidato  il personale tecnico procederà all'acquisto.
 
 - Consegna e verifica del prodotto. Quando il prodotto sarà consegnato l'ordinante chiuderà la relativa richiesta di acquisto indicando se il prodotto ricevuto è stato accettato o respinto (perchè non conforme o non funzionante).
-  
+
+
 - E' possibile infine inserire qui un glossario che riporta tutti gli oggetti di dominio individuati, con la loro semantica, i loro eventuali sinonimi e le loro proprietà. !!!!!!!!!!!!!!!!!!!!!!!!
 
 ## Progettazione concettuale
 
 - Riportate qui il **modello ER iniziale**. Cercate di renderlo *leggibile*, altrimenti correggerlo diventerà impossibile. Se è troppo piccolo, dividetelo in parti e/o allegate anche un'immagine ad alta risoluzione alla relazione.
+ ![Diagramma ER](https://github.com/Shirotto/Base-di-Dati/assets/127602582/105d55fe-1464-461a-a6d0-7f883b3a5286)
 
 - Commentate gli elementi non visibili nella figura (ad esempio il contenuto degli attributi composti) nonché le scelte/assunzioni che vi hanno portato a creare determinate strutture, se lo ritenete opportuno.
 
@@ -41,7 +43,9 @@
 
 ### Ristrutturazione ed ottimizzazione del modello ER
 
-- Riportate qui il modello **ER ristrutturato** ed eventualmente ottimizzato. 
+- Riportate qui il modello **ER ristrutturato** ed eventualmente ottimizzato.
+ ![image](https://github.com/Shirotto/Base-di-Dati/assets/127602582/eb6b4f3e-2e72-47a4-9770-924f22bfff26)
+
 
 - Discutete le scelte effettuate, ad esempio nell'eliminare una generalizzazione o nello scindere un'entità.
 
