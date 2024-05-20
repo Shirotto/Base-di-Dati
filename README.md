@@ -21,10 +21,11 @@
   
 - Revisione del prodotto candidato. L'ordinante prenderà visione del prodotto candidato e potrà approvarlo o respingerlo, fornendo in questo caso una motivazione. In caso di richiesta respinta, il processo riprenderà dal passo 2, considerando che il tecnico incaricato sarà sempre lo stesso. La motivazione del rifiuto sarà mostrata assieme alle informazioni della richiesta, e il tecnico incaricato potrà modificare il prodotto candidato e inoltrarlo nuovamente all'ordinante.
 
-- Esecuzione dell'ordine. Nel caso in cui l'ordinante approvi la scelta del prodotto candidato al passo 3, il personale tecnico procederà all'acquisto (questa parte non sarà gestita dal nostro applicativo).
+- Esecuzione dell'ordine. Nel caso in cui l'ordinante approvi la scelta del prodotto candidato  il personale tecnico procederà all'acquisto.
 
-- Consegna e verifica del prodotto. Quando il prodotto sarà consegnato (prima o poi!), l'ordinante dovrà chiudere la relativa richiesta di acquisto indicando se il prodotto ricevuto è stato accettato, respinto perché non conforme oppure respinto perché non funzionante.
-- E' possibile infine inserire qui un glossario che riporta tutti gli oggetti di dominio individuati, con la loro semantica, i loro eventuali sinonimi e le loro proprietà.
+- Consegna e verifica del prodotto. Quando il prodotto sarà consegnato l'ordinante chiuderà la relativa richiesta di acquisto indicando se il prodotto ricevuto è stato accettato o respinto (perchè non conforme o non funzionante).
+- 
+- E' possibile infine inserire qui un glossario che riporta tutti gli oggetti di dominio individuati, con la loro semantica, i loro eventuali sinonimi e le loro proprietà. !!!!!!!!!!!!!!!!!!!!!!!!
 
 ## Progettazione concettuale
 
