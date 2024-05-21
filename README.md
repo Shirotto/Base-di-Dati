@@ -34,10 +34,16 @@
  ![Diagramma ER](https://github.com/Shirotto/Base-di-Dati/assets/127602582/105d55fe-1464-461a-a6d0-7f883b3a5286)
 
 - Commentate gli elementi non visibili nella figura (ad esempio il contenuto degli attributi composti) nonché le scelte/assunzioni che vi hanno portato a creare determinate strutture, se lo ritenete opportuno.
+- RICHIESTA D'ACQUISTO: Presumiamo che la richiesta d'acquisto possa contenere la richiesta di un singolo prodotto.
+- PRODOTTO CANDIDATO: Il prodotto candidato per una richiesta d'acquisto sarà uno solo, ma riteniamo utile tenere conto di tutte le proposte rifiutate per quella richiesta d'acquisto. Per questo "prodottto candidato" tiene conto del fatto di essere stato rifiutato o meno. I prodotti rifiutati verranno registrati in una lista apposita e poi rimossi una volta chiusa la richiesta a cui sono associati.
+- CATEGORIA: Le categorie presentano una struttura ad albero.
+
 
 ### Formalizzazione dei vincoli non esprimibili nel modello ER
 
 - Elencate gli altri **vincoli** sui dati che avete individuato e che non possono essere espressi nel diagramma ER.
+- VINCOLO DI ACCESSO E MODIFICA "RICHIESTA D'ACQUISTO"--> Il sistema prevede che un utente sia direttamente collegato ad una o più richieste d'acquisto, ma non tutti gli utenti ne hanno accesso allo stesso modo. Distinguiamo tre tipi di utente: tecnico, compratore e amministratore. Il "tecnico" avrà visione completa della "richiesta d'acquisto" ma potrà modificare solo il "prodotto candidato" presente in essa, aggiungendo un nuovo prodotto candidato o sostituendo quello vecchio in caso di necessità. Il "compratore", invece, avrà completo accesso alla r.a. e potra modificare i parametri a proprio piacimento in qualsiasi momento, non avrà ovviamente accesso al "prodotto candidato". Potrà, infine, chiudere la r.a. al termine del processo di acquisto o in qualsiasi momento lo desideri.
+
 
 ## Progettazione logica
 
@@ -48,6 +54,7 @@
 
 
 - Discutete le scelte effettuate, ad esempio nell'eliminare una generalizzazione o nello scindere un'entità.
+- RIMOZIONE GENERALIZZAZIONE UTENTE: tutti gli utenti hanno gli stessi attributi, quindi abbiamo deciso di unirli in un unica entità, aggiungendo l'attributo "Tipo" per distinguerli. 
 
 ### Traduzione del modello ER nel modello relazionale
 
