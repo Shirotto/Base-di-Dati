@@ -27,7 +27,7 @@
 
 GLOSSARIO
 
--Utente
+- Utente
 
 
 Entità che astrae il concetto di utente e associa ad ogni utnte (Tecnico, Compratore, Amministratore) oltre a Nome, Cognome ecc.. anche un ID_Utente, che è chiave primaria di quest'entità.
@@ -35,7 +35,7 @@ Entità che astrae il concetto di utente e associa ad ogni utnte (Tecnico, Compr
 
 
 
--Amministratore
+- Amministratore
 
 
 è l'unica entità che ha la proprietà di registrare alri utenti "ricorsivamente". Acquisisce gli attributi dell'entità utente.
@@ -43,7 +43,7 @@ Entità che astrae il concetto di utente e associa ad ogni utnte (Tecnico, Compr
 
 
 
--Tecnico Incaricato
+- Tecnico Incaricato
 
 
 Sinonimi: Tecnico, Responsabile Tecnico
@@ -54,7 +54,7 @@ Attraverso "Tecnico" riusciamo a gestire la ricerca e la selezione del prodotto 
 
 
 
--Compratore
+- Compratore
 
 
 Sinonimi: Richiedente
@@ -65,7 +65,7 @@ L' "Ordinante" è l'utente che ha la necessità di un prodotto e formula unala R
 
 
 
--Richiesta di Acquisto
+- Richiesta di Acquisto
 
 
 Sinonimi: Ordine di Acquisto, Ordine
@@ -76,7 +76,7 @@ Una volta che il tecnico incaricato prende in carico la richiesta, quest'entità
 
 
 
--Tecnico Incaricato
+- Tecnico Incaricato
 
 
 Sinonimi: Tecnico, Responsabile Tecnico
@@ -87,7 +87,7 @@ Il "Tecnico Incaricato" è la persona designata a gestire la ricerca e la selezi
 
 
 
--Prodotto Candidato
+- Prodotto Candidato
 
 
 Sinonimi: Proposta di Prodotto, Prodotto Selezionato
@@ -98,7 +98,7 @@ Quest'entità descrive il prodotto scelto dal tecnico incaricato che meglio corr
 
 
 
--Categoria
+- Categoria
 
 
 Sinonimi: Classe di Prodotto
@@ -107,7 +107,7 @@ La "Categoria di Prodotto" definisce il tipo di prodotto che il compratore desid
 
 
 
--Specifica
+- Specifica
 
 
 Prodotto vero e proprio.
