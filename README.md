@@ -5,7 +5,7 @@
 | Matricola | Nome | Cognome | Contributo al progetto |
 |:---------:|:----:|:-------:|:----------------------:|
 |    285246 | Antonio     | sabatini        |                        |
-|     285714      |    Mario  |      Ranalli   |        Mascotte         |
+|     285714      |    Mario  |      Ranalli   |        Mascotte   / Filantropo      |
 |     265332     |    Marco  |      Nicolella   |                        |
 
 **Data di consegna del progetto**: gg/mm/aaaa
@@ -95,7 +95,8 @@ La "Specifica" rappresenta il prodotto vero e proprio. Attraverso la "Specifica"
 ## Progettazione concettuale
 
 - Riportate qui il **modello ER iniziale**. Cercate di renderlo *leggibile*, altrimenti correggerlo diventerà impossibile. Se è troppo piccolo, dividetelo in parti e/o allegate anche un'immagine ad alta risoluzione alla relazione.
- ![Diagramma ER](https://github.com/Shirotto/Base-di-Dati/assets/127602582/105d55fe-1464-461a-a6d0-7f883b3a5286)
+![Diagramma ER](https://github.com/Shirotto/Base-di-Dati/assets/127602582/0b984de5-c415-464a-ae29-4a9f2bb95bba)
+
 
 - Commentate gli elementi non visibili nella figura (ad esempio il contenuto degli attributi composti) nonché le scelte/assunzioni che vi hanno portato a creare determinate strutture, se lo ritenete opportuno.
 - RICHIESTA D'ACQUISTO: Presumiamo che la richiesta d'acquisto possa contenere la richiesta di un singolo prodotto.
