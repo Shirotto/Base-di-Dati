@@ -32,10 +32,16 @@ GLOSSARIO
 
 Entità che astrae il concetto di utente e associa ad ogni utnte (Tecnico, Compratore, Amministratore) oltre a Nome, Cognome ecc.. anche un ID_Utente, che è chiave primaria di quest'entità.
 
+
+
+
 -Amministratore
 
 
 è l'unica entità che ha la proprietà di registrare alri utenti "ricorsivamente". Acquisisce gli attributi dell'entità utente.
+
+
+
 
 -Tecnico Incaricato
 
@@ -43,6 +49,9 @@ Entità che astrae il concetto di utente e associa ad ogni utnte (Tecnico, Compr
 Sinonimi: Tecnico, Responsabile Tecnico
 Il membro del personale tecnico responsabile della ricerca e selezione del prodotto.
 Attraverso "Tecnico" riusciamo a gestire la ricerca e la selezione del prodotto candidato che soddisfa le specifiche della richiesta di acquisto. Questo tecnico visualizza le richieste, seleziona i prodotti appropriati, e interagisce con l'ordinante durante il processo di approvazione del prodotto attraverso la richiesta d'acquisto.
+
+
+
 
 
 -Compratore
@@ -53,12 +62,18 @@ La persona che richiede l'acquisto di un prodotto.
 L' "Ordinante" è l'utente che ha la necessità di un prodotto e formula unala Richiesta di Acquisto. L'ordinante attraverso la richiesta di acquisto puo' fornire le specifiche dettagliate e approvare o respingere il prodotto.
 
 
+
+
+
 -Richiesta di Acquisto
 
 
 Sinonimi: Ordine di Acquisto, Ordine
 Richiesta formale per acquistare un prodotto o un insieme di prodotti.
 Una volta che il tecnico incaricato prende in carico la richiesta, quest'entità ci permette di selezionare la categoria del prodotto da acquistare. 
+
+
+
 
 
 -Tecnico Incaricato
@@ -69,6 +84,9 @@ Il membro del personale tecnico responsabile della ricerca e selezione del prodo
 Il "Tecnico Incaricato" è la persona designata a gestire la ricerca e la selezione del prodotto candidato che soddisfa le specifiche della richiesta di acquisto. Questo tecnico visualizza le richieste, seleziona i prodotti appropriati, e interagisce con l'ordinante durante il processo di approvazione del prodotto.
 
 
+
+
+
 -Prodotto Candidato
 
 
@@ -77,18 +95,23 @@ Il prodotto selezionato dal tecnico incaricato che risponde alle caratteristiche
 Quest'entità descrive il prodotto scelto dal tecnico incaricato che meglio corrisponde alle caratteristiche richieste dall'ordinante.Questo prodotto viene presentato all'ordinante per l'approvazione o il rifiuto. 
 
 
+
+
+
 -Categoria
 
 
 Sinonimi: Classe di Prodotto
 La "Categoria di Prodotto" definisce il tipo di prodotto che il compratore desidera acquistare. Ha un attributo che funge da chiave primaria e può contenere tutte le sotto categorie. Inoltre, associa un valore univoco all'entità "Specifica".
 
+
+
+
 -Specifica
 
 
 Prodotto vero e proprio.
 La "Specifica" rappresenta il prodotto vero e proprio. Attraverso la "Specifica" è possibile risalire al prodotto effettivamente selezionato e alla quantità necessaria.
-
 
 
 
