@@ -142,13 +142,14 @@ La "Specifica" rappresenta il prodotto vero e proprio. Attraverso la "Specifica"
 
 
 - Discutete le scelte effettuate, ad esempio nell'eliminare una generalizzazione o nello scindere un'entità.
-- RIMOZIONE GENERALIZZAZIONE UTENTE: tutti gli utenti hanno gli stessi attributi, quindi abbiamo deciso di unirli in un unica entità, aggiungendo l'attributo "Tipo" per distinguerli. 
+- RIMOZIONE GENERALIZZAZIONE UTENTE: Considerando che tutti gli utenti condividono gli stessi attributi, abbiamo deciso di consolidarli in un'unica entità per semplificare la gestione. Per distinguere i vari tipi di utenti all'interno di questa entità consolidata, abbiamo introdotto un nuovo attributo denominato "Tipo". Questo attributo ci permette di identificare e differenziare chiaramente i diversi tipi di utenti, garantendo al contempo una struttura dati più efficiente e organizzata.
 
 ### Traduzione del modello ER nel modello relazionale
 
 - Riportate qui il **modello relazionale** finale, derivato dal modello ER ristrutturato della sezione precedente e che verrà implementato in SQL in quella successiva. 
 
 - Nel modello evidenziate le chiavi primarie e le chiavi esterne.
+![Modello relazionale](https://github.com/Shirotto/Base-di-Dati/assets/127602582/5c587f0b-323c-44e1-82f7-832f197f80ce)
 
 ## Progettazione fisica
 
