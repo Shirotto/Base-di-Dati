@@ -76,16 +76,6 @@ Una volta che il tecnico incaricato prende in carico la richiesta, quest'entità
 
 
 
-Tecnico Incaricato
-
-
-Sinonimi: Tecnico, Responsabile Tecnico
-- Il membro del personale tecnico responsabile della ricerca e selezione del prodotto.
-Il "Tecnico Incaricato" è la persona designata a gestire la ricerca e la selezione del prodotto candidato che soddisfa le specifiche della richiesta di acquisto. Questo tecnico visualizza le richieste, seleziona i prodotti appropriati, e interagisce con l'ordinante durante il processo di approvazione del prodotto.
-
-
-
-
 
 Prodotto Candidato
 
@@ -111,7 +101,7 @@ Specifica
 
 
 - Prodotto vero e proprio.
-La "Specifica" rappresenta il prodotto vero e proprio. Attraverso la "Specifica" è possibile risalire al prodotto effettivamente selezionato e alla quantità necessaria.
+La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Specifica" è possibile risalire al prodotto e alla quantità necessaria.
 
 
 
