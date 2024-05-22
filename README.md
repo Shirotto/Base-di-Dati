@@ -4,9 +4,9 @@
 
 | Matricola | Nome | Cognome | Contributo al progetto |
 |:---------:|:----:|:-------:|:----------------------:|
-|    285246 | Antonio     | sabatini        |                        |
+|    285246 | Antonio     | sabatini        |      pollo                  |
 |     285714      |    Mario  |      Ranalli   |        Mascotte   / Filantropo      |
-|     265332     |    Marco  |      Nicolella   |                        |
+|     265332     |    Marco  |      Nicolella   |        ippopotamo                |
 
 **Data di consegna del progetto**: gg/mm/aaaa
 
