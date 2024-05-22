@@ -118,7 +118,7 @@ La "Specifica" rappresenta il prodotto vero e proprio. Attraverso la "Specifica"
 ## Progettazione concettuale
 
 - Riportate qui il **modello ER iniziale**. Cercate di renderlo *leggibile*, altrimenti correggerlo diventerà impossibile. Se è troppo piccolo, dividetelo in parti e/o allegate anche un'immagine ad alta risoluzione alla relazione.
-![Diagramma ER](https://github.com/Shirotto/Base-di-Dati/assets/127602582/0b984de5-c415-464a-ae29-4a9f2bb95bba)
+![Diagramma ER](https://github.com/Shirotto/Base-di-Dati/assets/127602582/265452c9-b150-465b-838a-ea248d618d8b)
 
 
 - Commentate gli elementi non visibili nella figura (ad esempio il contenuto degli attributi composti) nonché le scelte/assunzioni che vi hanno portato a creare determinate strutture, se lo ritenete opportuno.
