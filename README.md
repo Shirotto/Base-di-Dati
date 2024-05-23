@@ -140,7 +140,8 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 - Riportate qui il **modello relazionale** finale, derivato dal modello ER ristrutturato della sezione precedente e che verrà implementato in SQL in quella successiva. 
 
 - Nel modello evidenziate le chiavi primarie e le chiavi esterne.
-![Modello relazionale](https://github.com/Shirotto/Base-di-Dati/assets/127602582/5c587f0b-323c-44e1-82f7-832f197f80ce)
+![Modello relazionale](https://github.com/Shirotto/Base-di-Dati/assets/127602582/c9ec5a9e-f47c-4d89-948e-0454c9184de7)
+
 
 ## Progettazione fisica
 
