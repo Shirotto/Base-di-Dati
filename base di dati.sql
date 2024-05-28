@@ -22,9 +22,13 @@ CREATE TABLE utente (
 
 CREATE TABLE richiesta_acquisto (
     ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    ID_utente INTEGER UNSIGNED NOT NULL,
     totale FLOAT UNSIGNED NOT NULL,
     `data` DATETIME NOT NULL,
-    numero_richiesta INTEGER UNSIGNED
+    numero_richiesta INTEGER UNSIGNED,
+    CONSTRAINT utente_assegnato FOREIGN KEY (ID_utente)
+        REFERENCES utente (ID)
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE prodotto_candidato (
