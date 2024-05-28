@@ -1,48 +1,35 @@
--- Inserire Richiesta D'acquisto
-INSERT IGNORE INTO richiesta_acquisto ( totale, `data`, numero_richiesta)
- VALUES (250, now(), 1);
--- Inserire Categoria
-INSERT IGNORE INTO categoria (nome)
-VALUES ('Elettronica');
--- Inserire Specifica 
-INSERT INTO specifica (nome, quantità)
-VALUES ('RAM', 16),
-       ('Storage', 512);
--- Trovare l'ID della categoria 'Elettronica'
-SELECT ID INTO @id_categoria FROM categoria WHERE nome = 'Elettronica';
+-- Trova l'ID dell'utente "Mario Ranalli"
+SELECT ID INTO @id_utente FROM utente WHERE nome = 'Paolo' AND cognome = 'Cannone';
 
--- Trovare gli ID delle specifiche
-SELECT ID INTO @id_specifica1 FROM specifica WHERE nome = 'RAM';
-SELECT ID INTO @id_specifica2 FROM specifica WHERE nome = 'Storage';
+-- Trova l'ID della categoria "PERSONAL COMPUTER"
+SELECT ID INTO @id_categoria FROM categoria WHERE nome = 'PERSONAL COMPUTER';
 
--- Trovare valore nella specifica
-SELECT quantità INTO @valore1 FROM specifica WHERE quantità = 16;
-SELECT quantità INTO @valore2 FROM specifica WHERE quantità = 512;
+-- Inserisce una nuova richiesta d'acquisto
+INSERT INTO richiesta_acquisto (ID_utente, totale, `data`, numero_richiesta)
+VALUES (@id_utente, 250.00, NOW(), 1);
 
--- Associare le specifiche alla categoria
-INSERT INTO associa (valore, ID_categoria, ID_specifica)
-VALUES (@valore1, @id_categoria,@id_specifica1),
-       (@valore2, @id_categoria,@id_specifica2);
+-- Trova l'ID della nuova richiesta d'acquisto
+SELECT ID INTO @id_richiesta_acquisto FROM richiesta_acquisto WHERE numero_richiesta = 1;
 
--- Trovare l'ID della richiesta di acquisto
-SELECT ID INTO @id_richiesta FROM richiesta_acquisto WHERE numero_richiesta = 1;
+-- Associa la categoria "PERSONAL COMPUTER" alla richiesta d'acquisto
+INSERT INTO seleziona (ID_richiesta_acquisto, ID_categoria)
+VALUES (@id_richiesta_acquisto, @id_categoria);
 
--- Inserire un prodotto candidato associato alla richiesta di acquisto
+
+-- Inserisce un prodotto candidato associato alla richiesta di acquisto
 INSERT INTO prodotto_candidato (nome_prodotto, nome_produttore, ID_richiesta_acquisto, codice_prodotto, URL_info, note, prezzo, approvazione)
-VALUES ('Laptop X', 'Produttore Y', @id_richiesta, 12345, 'link', 'Note', 100.50, FALSE);
+VALUES ('Laptop', 'Produttore', @id_richiesta_acquisto, 12345, 'link', 'Note', 100.50, FALSE);
 
--- Trovare l'ID del prodotto candidato appena inserito
+-- Trova l'ID del prodotto candidato appena inserito
 SELECT ID INTO @id_prodotto FROM prodotto_candidato WHERE codice_prodotto = 12345;
 
--- Aggiornare lo stato delle proposte di acquisto
+-- Aggiorna lo stato delle proposte di acquisto
 INSERT INTO propone (stato, ID_richiesta_acquisto, ID_prodotto_candidato)
-VALUES ('In attesa', @id_richiesta, @id_prodotto);
+VALUES ('In attesa', @id_richiesta_acquisto, @id_prodotto);
 
--- Verificare il contenuto delle tabelle
-SELECT * FROM richiesta_acquisto;
-SELECT * FROM categoria;
-SELECT * FROM specifica;
-SELECT * FROM associa;
-SELECT * FROM prodotto_candidato;
-SELECT * FROM propone;
+SELECT * FROM richiesta_acquisto WHERE numero_richiesta = 1;
+SELECT * FROM seleziona WHERE ID_richiesta_acquisto = @id_richiesta_acquisto;
+SELECT * FROM prodotto_candidato WHERE ID = @id_prodotto;
+SELECT * FROM propone WHERE ID_richiesta_acquisto = @id_richiesta_acquisto AND ID_prodotto_candidato = @id_prodotto;
+       
        
