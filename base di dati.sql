@@ -70,9 +70,9 @@ CREATE TABLE propone (
 );
 
 CREATE TABLE seleziona (
-    ID_richiesta_acquisto INTEGER UNSIGNED NOT NULL,
+    ID_richiesta_acquisto INTEGER NOT NULL,
     ID_categoria INTEGER UNSIGNED NOT NULL,
-    CONSTRAINT associa_categoria FOREIGN KEY (ID_categoria)
+    CONSTRAINT associa_categoria1 FOREIGN KEY (ID_categoria)
         REFERENCES categoria (ID)
         ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT associa_richiesta FOREIGN KEY (ID_richiesta_acquisto)
