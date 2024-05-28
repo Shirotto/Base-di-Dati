@@ -79,7 +79,28 @@ CREATE TABLE associa (
     PRIMARY KEY (ID_categoria , ID_specifica)
 );
 
-INSERT INTO categoria(nome) VALUES ('ciao');
-INSERT INTO categoria(nome) VALUES ('ciao1');
-INSERT INTO categoria(nome) VALUES ('ciao2');
+INSERT INTO categoria(nome) VALUES ('PERSONAL COMPUTER');
+INSERT INTO categoria(nome) VALUES ('COMPUTER FISSI');
+INSERT INTO categoria(nome) VALUES ('COMPUTER DA GAMING');
+INSERT INTO categoria(nome) VALUES ('TABLET');
+INSERT INTO categoria(nome) VALUES ('IBRIDO');
+INSERT INTO categoria(nome) VALUES ('MONITORS');
+INSERT INTO categoria(nome) VALUES ('TASTIERE');
+INSERT INTO categoria(nome) VALUES ('MOUSE');
+INSERT INTO categoria(nome) VALUES ('SCHEDE VIDEO');
+INSERT INTO categoria(nome) VALUES ('SCHEDE MADRE');
+
+
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Mario','Ranalli','via dei piedini anime','Marialliramario@mario.com','1043223232','u');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Marco','Nicolella','via qua sotto','Marconico@marco.com','0032323235','t');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Antonio','sabatini','via lontanissimo','Antonioercriminale67@antonio.com','1458436984','a');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Gianfranco','Bulgigatti','Via Pantano','Bulgipazzi@dfddfd.it','2121261627','t');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Sandro','Di Biase','via Di Bitonto','Sandrinotp@fdffdf.com','1445118646','u');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Mario','Mariottide','Piazza Dei Poracci','Mariottide@ffdfdf.it','1848698184','u');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Fernandello','Mariottide','Dove Capita','Ferndy@dsdsd.com','3589147614','u');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Paolo','Cannone','Via Milano','Baolo@fdfd.it','4819813714','u');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Zeb','Ottantanove','Malta','Zebbone@emdem.com','1763489654','u');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Pietro','Smusi','Via dello sdunzo','Pietrosmusi@fdfdfd.it','947921314','t');
+
 SELECT * FROM categoria;
+SELECT * FROM utente;
