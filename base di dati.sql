@@ -69,6 +69,18 @@ CREATE TABLE propone (
     PRIMARY KEY (ID_richiesta_acquisto , ID_prodotto_candidato)
 );
 
+CREATE TABLE seleziona (
+    ID_richiesta_acquisto INTEGER UNSIGNED NOT NULL,
+    ID_categoria INTEGER UNSIGNED NOT NULL,
+    CONSTRAINT associa_categoria FOREIGN KEY (ID_categoria)
+        REFERENCES categoria (ID)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT associa_richiesta FOREIGN KEY (ID_richiesta_acquisto)
+        REFERENCES richiesta_acquisto (ID)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY (ID_richiesta_acquisto , ID_categoria)
+);
+
 CREATE TABLE associa (
     valore INTEGER UNSIGNED NOT NULL,
     ID_categoria INTEGER UNSIGNED NOT NULL,
@@ -105,6 +117,3 @@ INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Fernande
 INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Paolo','Cannone','Via Milano','Baolo@fdfd.it','4819813714','u');
 INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Zeb','Ottantanove','Malta','Zebbone@emdem.com','1763489654','u');
 INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Pietro','Smusi','Via dello sdunzo','Pietrosmusi@fdfdfd.it','947921314','t');
-
-SELECT * FROM categoria;
-SELECT * FROM utente;
