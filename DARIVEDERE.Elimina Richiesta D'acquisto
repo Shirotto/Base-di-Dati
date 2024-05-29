@@ -1,19 +1,27 @@
--- ID della richiesta d'acquisto da eliminare
-SET @id_richiesta_da_eliminare = 1;
+DELIMITER //
+-- Creo una procedura che elimina la richiesta d'acquisto data in input
+CREATE PROCEDURE EliminaRichiestaAcquisto(
+IN richiesta_id INT
+)
+BEGIN 
 
--- Rimuove le associazioni dalla tabella "propone"
-DELETE FROM propone WHERE ID_richiesta_acquisto = @id_richiesta_da_eliminare;
+-- Rimuove le informazione della richiesta selezionata dalla tabella propone
+DELETE FROM propone WHERE ID_richiesta_acquisto = richiesta_id;
 
--- Rimuove le associazioni dalla tabella "seleziona"
-DELETE FROM seleziona WHERE ID_richiesta_acquisto = @id_richiesta_da_eliminare;
+-- Rimuove le informazione della richiesta selezionata dalla tabella seleziona
+DELETE FROM seleziona WHERE ID_richiesta_acquisto = richiesta_id;
 
 -- Rimuove i prodotti candidati associati alla richiesta d'acquisto
-DELETE FROM prodotto_candidato WHERE ID_richiesta_acquisto = @id_richiesta_da_eliminare;
+DELETE FROM prodotto_candidato WHERE ID_richiesta_acquisto = richiesta_id;
 
 -- Rimuove la richiesta d'acquisto dalla tabella "richiesta_acquisto"
-DELETE FROM richiesta_acquisto WHERE ID = @id_richiesta_da_eliminare;
+DELETE FROM richiesta_acquisto WHERE ID = richiesta_id;
 
-SELECT * FROM richiesta_acquisto WHERE ID = @id_richiesta_da_eliminare;
-SELECT * FROM propone WHERE ID_richiesta_acquisto = @id_richiesta_da_eliminare;
-SELECT * FROM seleziona WHERE ID_richiesta_acquisto = @id_richiesta_da_eliminare;
-SELECT * FROM prodotto_candidato WHERE ID_richiesta_acquisto = @id_richiesta_da_eliminare;
+SELECT 'Richiesta eliminata' AS risultato;
+        END //
+        DELIMITER ;
+        CALL EliminaRichiestaAcquisto(1);
+SELECT * FROM richiesta_acquisto WHERE numero_richiesta = 1;
+SELECT * FROM seleziona WHERE ID_richiesta_acquisto = @id_richiesta_acquisto;
+SELECT * FROM prodotto_candidato WHERE ID = @id_prodotto;
+SELECT * FROM propone WHERE ID_richiesta_acquisto = @id_richiesta_acquisto AND ID_prodotto_candidato = @id_prodotto;
