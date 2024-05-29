@@ -4,6 +4,7 @@ CREATE PROCEDURE ApprovaProdottoCandidato(
     IN AP_ID_richiesta_acquisto INT,
     IN AP_ID_prodotto_candidato INT
 )
+    
 BEGIN
     DECLARE ver_count INT;
 
