@@ -16,7 +16,7 @@ BEGIN
     -- se non esiste una combinazione allora genera un'eccezine personalizzata
     IF ver_count = 0 THEN
         SIGNAL SQLSTATE '45000'
-        SET MESSAGE_TEXT = 'La combinazione di richiesta d\'acquisto e prodotto candidato non esiste.;
+        SET MESSAGE_TEXT = 'La combinazione di richiesta d\'acquisto e prodotto candidato non esiste.';
     ELSE
         
         -- Aggiorna lo stato di approvazione del prodotto candidato
