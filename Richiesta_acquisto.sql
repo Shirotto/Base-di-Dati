@@ -1,4 +1,4 @@
--- Trova l'ID dell'utente "Mario Ranalli"
+-- Trova l'ID dell'utente "Paolo Cannone"
 SELECT ID INTO @id_utente FROM utente WHERE nome = 'Paolo' AND cognome = 'Cannone';
 
 -- Trova l'ID della categoria "PERSONAL COMPUTER"
