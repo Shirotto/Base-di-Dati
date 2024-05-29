@@ -20,8 +20,3 @@ DELETE FROM richiesta_acquisto WHERE ID = richiesta_id;
 SELECT 'Richiesta eliminata' AS risultato;
         END //
         DELIMITER ;
-        CALL EliminaRichiestaAcquisto(1);
-SELECT * FROM richiesta_acquisto WHERE numero_richiesta = 1;
-SELECT * FROM seleziona WHERE ID_richiesta_acquisto = @id_richiesta_acquisto;
-SELECT * FROM prodotto_candidato WHERE ID = @id_prodotto;
-SELECT * FROM propone WHERE ID_richiesta_acquisto = @id_richiesta_acquisto AND ID_prodotto_candidato = @id_prodotto;
