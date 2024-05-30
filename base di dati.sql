@@ -17,34 +17,34 @@ CREATE TABLE utente (
     indirizzo VARCHAR(200),
     email VARCHAR(100) NOT NULL,
     telefono VARCHAR(100) NOT NULL,
-    tipo ENUM('utente', 'amministratore','tecnico') NOT NULL DEFAULT 'utente'
+    tipo ENUM('utente', 'amministratore','tecnico') NOT NULL DEFAULT 'utente',
     num_richieste_associate INTEGER UNSIGNED not null default 0
 );
 
 CREATE TABLE prodotto_candidato (
-    ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    ID INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     nome_prodotto VARCHAR(200) NOT NULL,
     nome_produttore VARCHAR(200) NOT NULL,
     codice_prodotto INTEGER UNSIGNED NOT NULL UNIQUE,
     URL_info VARCHAR(2083),
     note VARCHAR(500),
-    prezzo FLOAT NOT NULL,
-    approvazione ENUM('approvato','rifiutato','in valutazione')  NOT NULL DEFAULT 'in valutazione',
+    prezzo FLOAT UNSIGNED NOT NULL,
+    approvazione ENUM('approvato','rifiutato','in valutazione')  NOT NULL DEFAULT 'in valutazione'
 );
 
 CREATE TABLE richiesta_acquisto (
-    ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    ID INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     ID_utente INTEGER UNSIGNED NOT NULL,
-    ID_prodottoass INTEGER UNSIGNED DEFAULT NULL,
+    ID_prodotto_proposto INTEGER UNSIGNED DEFAULT NULL,
     totale FLOAT UNSIGNED NOT NULL,
     `data` DATETIME NOT NULL default now(),
-    tecnico_assegnato INTEGER UNSIGNED DEFAULT NULL
+    tecnico_assegnato INTEGER UNSIGNED DEFAULT NULL,
     CONSTRAINT tecnico_assegnato FOREIGN KEY (ID_utente)
         REFERENCES utente (ID)
         ON UPDATE CASCADE,
-        CONSTRAINT prodotto_ass FOREIGN KEY (ID_prodottoass)
-        REFERENCES prodotto_candidato (ID)
-        ON UPDATE CASCADE
+         CONSTRAINT prodotto_proposto FOREIGN KEY (ID_prodotto_proposto)
+         REFERENCES prodotto_candidato (ID)
+         ON UPDATE CASCADE
 );
 
 CREATE TABLE categoria (
@@ -59,8 +59,8 @@ CREATE TABLE specifica (
 
 CREATE TABLE propone (
     stato VARCHAR(100) NOT NULL,
-    ID_richiesta_acquisto INTEGER NOT NULL,
-    ID_prodotto_candidato INTEGER NOT NULL,
+    ID_richiesta_acquisto INTEGER UNSIGNED NOT NULL,
+    ID_prodotto_candidato INTEGER UNSIGNED NOT NULL,
     CONSTRAINT propone_prodotto FOREIGN KEY (ID_prodotto_candidato)
         REFERENCES prodotto_candidato (ID)
         ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -71,7 +71,7 @@ CREATE TABLE propone (
 );
 
 CREATE TABLE seleziona (
-    ID_richiesta_acquisto INTEGER NOT NULL,
+    ID_richiesta_acquisto INTEGER UNSIGNED NOT NULL,
     ID_categoria INTEGER UNSIGNED NOT NULL,
     CONSTRAINT associa_categoria1 FOREIGN KEY (ID_categoria)
         REFERENCES categoria (ID)
@@ -107,21 +107,21 @@ INSERT INTO categoria(nome) VALUES ('MOUSE');
 INSERT INTO categoria(nome) VALUES ('SCHEDE VIDEO');
 INSERT INTO categoria(nome) VALUES ('SCHEDE MADRE');
 
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Mario','Ranalli','via dei piedini anime','Marialliramario@mario.com','1043223232','u');
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Marco','Nicolella','via qua sotto','Marconico@marco.com','0032323235','t');
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Antonio','sabatini','via lontanissimo','Antonioercriminale67@antonio.com','1458436984','a');
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Gianfranco','Bulgigatti','Via Pantano','Bulgipazzi@dfddfd.it','2121261627','t');
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Sandro','Di Biase','via Di Bitonto','Sandrinotp@fdffdf.com','1445118646','u');
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Mario','Mariottide','Piazza Dei Poracci','Mariottide@ffdfdf.it','1848698184','u');
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Fernandello','Mariottide','Dove Capita','Ferndy@dsdsd.com','3589147614','u');
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Paolo','Cannone','Via Milano','Baolo@fdfd.it','4819813714','u');
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Zeb','Ottantanove','Malta','Zebbone@emdem.com','1763489654','u');
-INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Pietro','Smusi','Via dello sdunzo','Pietrosmusi@fdfdfd.it','947921314','t');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Mario','Ranalli','via dei piedini anime','Marialliramario@mario.com','1043223232','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Marco','Nicolella','via qua sotto','Marconico@marco.com','0032323235','tecnico');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Antonio','sabatini','via lontanissimo','Antonioercriminale67@antonio.com','1458436984','amministratore');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Gianfranco','Bulgigatti','Via Pantano','Bulgipazzi@dfddfd.it','2121261627','tecnico');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Sandro','Di Biase','via Di Bitonto','Sandrinotp@fdffdf.com','1445118646','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Mario','Mariottide','Piazza Dei Poracci','Mariottide@ffdfdf.it','1848698184','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Fernandello','Mariottide','Dove Capita','Ferndy@dsdsd.com','3589147614','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Paolo','Cannone','Via Milano','Baolo@fdfd.it','4819813714','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Zeb','Ottantanove','Malta','Zebbone@emdem.com','1763489654','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Pietro','Smusi','Via dello sdunzo','Pietrosmusi@fdfdfd.it','947921314','tecnico');
 
-INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo,approvazione) VALUES ('asis notebook','asis company',1,'www.asis','tastiera colorata',1080,FALSE);
-INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo,approvazione) VALUES ('applo notebook','applo company',2,'www.indirizzo','telecamera',2000,FALSE);
-INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo,approvazione) VALUES ('pera phone','pera inc',3,'www.pera','dedica',750,FALSE);
-INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo,approvazione) VALUES ('playstescion','sany',4,'www.indirizzo corretto','normale',350,FALSE);
-INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo,approvazione) VALUES ('ybox','mocrosoft',5,'www.indirizzomocrosofoct','nulla',250,FALSE);
-INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo,approvazione) VALUES ('antendo','antendo inc',6,'www.indirizzoantendo','tastiera normale',500,FALSE);
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES ('asis notebook','asis company',1,'www.asis','tastiera colorata',1080);
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES ('applo notebook','applo company',2,'www.indirizzo','telecamera',2000);
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES ('pera phone','pera inc',3,'www.pera','dedica',750);
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES ('playstescion','sany',4,'www.indirizzo corretto','normale',350);
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES ('ybox','mocrosoft',5,'www.indirizzomocrosofoct','nulla',250);
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES ('antendo','antendo inc',6,'www.indirizzoantendo','tastiera normale',500);
 SELECT * FROM prodotto_candidato;
