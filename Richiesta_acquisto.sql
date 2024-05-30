@@ -37,9 +37,9 @@ WHERE
 INSERT INTO seleziona (ID_richiesta_acquisto, ID_categoria)
 VALUES (id_richiesta_acquisto, @id_categoria);
 
--- Associa la categoria "PERSONAL COMPUTER" alla richiesta d'acquisto
-INSERT INTO seleziona (ID_richiesta_acquisto, ID_categoria)
-VALUES (id_richiesta_acquisto, @id_categoria);
-
  END //
         DELIMITER ;
+        
+CALL CreareRichiesta( 3 , 'PERSONAL COMPUTER');
+CALL CreareRichiesta( 1 , 'PERSONAL COMPUTER');
+select * FROM richiesta_acquisto;
