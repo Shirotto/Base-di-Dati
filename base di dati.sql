@@ -37,7 +37,6 @@ CREATE TABLE richiesta_acquisto (
     ID_prodottoass INTEGER NULL,
     totale FLOAT UNSIGNED NOT NULL,
     `data` DATETIME NOT NULL,
-    numero_richiesta INTEGER UNSIGNED,
     CONSTRAINT utente_assegnato FOREIGN KEY (ID_utente)
         REFERENCES utente (ID)
         ON UPDATE CASCADE,
