@@ -12,12 +12,13 @@ DROP TABLE IF EXISTS prodotto_candidato;
 
 CREATE TABLE utente (
     ID INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(200) NOT NULL,
+    nome VARCHAR(200) NOT NULL,
     cognome VARCHAR(200) NOT NULL,
     indirizzo VARCHAR(200),
     email VARCHAR(100) NOT NULL,
     telefono VARCHAR(100) NOT NULL,
-    tipo ENUM('u', 'a','t') NOT NULL DEFAULT 'u'
+    tipo ENUM('utente', 'amministratore','tecnico') NOT NULL DEFAULT 'utente'
+    num_richieste_associate INTEGER UNSIGNED not null default 0
 );
 
 CREATE TABLE prodotto_candidato (
@@ -28,19 +29,20 @@ CREATE TABLE prodotto_candidato (
     URL_info VARCHAR(2083),
     note VARCHAR(500),
     prezzo FLOAT NOT NULL,
-    approvazione BOOLEAN NOT NULL
+    approvazione ENUM('approvato','rifiutato','in valutazione')  NOT NULL DEFAULT 'in valutazione',
 );
 
 CREATE TABLE richiesta_acquisto (
     ID INTEGER PRIMARY KEY AUTO_INCREMENT,
     ID_utente INTEGER UNSIGNED NOT NULL,
-    ID_prodottoass INTEGER NULL,
+    ID_prodottoass INTEGER UNSIGNED DEFAULT NULL,
     totale FLOAT UNSIGNED NOT NULL,
-    `data` DATETIME NOT NULL,
-    CONSTRAINT utente_assegnato FOREIGN KEY (ID_utente)
+    `data` DATETIME NOT NULL default now(),
+    tecnico_assegnato INTEGER UNSIGNED DEFAULT NULL
+    CONSTRAINT tecnico_assegnato FOREIGN KEY (ID_utente)
         REFERENCES utente (ID)
         ON UPDATE CASCADE,
-        CONSTRAINT prodotto_assegnato FOREIGN KEY (ID_prodottoass)
+        CONSTRAINT prodotto_ass FOREIGN KEY (ID_prodottoass)
         REFERENCES prodotto_candidato (ID)
         ON UPDATE CASCADE
 );
