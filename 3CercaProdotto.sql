@@ -10,7 +10,7 @@ IN prezzo INT
 )
 BEGIN 
 
-INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo,approvazione) VALUES (nome_prodotto,nome_produttore,codice_prodotto,url_prodotto,note,prezzo,approvazione);
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES (nome_prodotto,nome_produttore,codice_prodotto,url_prodotto,note,prezzo);
 
 END //
 DELIMITER ;
