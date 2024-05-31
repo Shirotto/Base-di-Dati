@@ -89,10 +89,10 @@ CREATE TABLE seleziona (
 
 CREATE TABLE associa (
     ID_categoria INTEGER UNSIGNED NOT NULL,
+    ID_richiesta_acquisto INTEGER NOT NULL,
     ID_specifica INTEGER UNSIGNED NOT NULL,
-    ID_richiesta INTEGER NOT NULL,
     quantità INT UNSIGNED NOT NULL,
-    CONSTRAINT richiesta_associata FOREIGN KEY (ID_richiesta)
+    CONSTRAINT richiesta_associata FOREIGN KEY (ID_richiesta_acquisto)
     REFERENCES richiesta_acquisto (ID)
     ON UPDATE CASCADE,
     CONSTRAINT associa_categoria FOREIGN KEY (ID_categoria)
