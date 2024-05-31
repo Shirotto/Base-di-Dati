@@ -26,7 +26,7 @@ END IF;
 INSERT INTO seleziona (ID_richiesta_acquisto, ID_categoria)
 VALUES (@ID_richiesta, @id_categoria);
 
-INSERT INTO associa (ID_categoria, ID_specifica,ID_richiesta,quantità)
+INSERT INTO associa (ID_categoria, ID_specifica,ID_richiesta_acquisto,quantità)
 VALUES (@id_categoria, @id_specifica,@ID_richiesta,quantità_specifica);
 
 
