@@ -6,7 +6,7 @@ where tipo = 'tecnico';
 
 delimiter \\
 
-CREATE PROCEDURE assegna_ra(IN ra_ID INTEGER,id_richiesta INTEGER)
+CREATE PROCEDURE assegna_ra(IN ra_ID INTEGER)
 
 
 begin
@@ -26,7 +26,7 @@ UPDATE richiesta_acquisto
 SET 
     tecnico_assegnato = tecnico
 WHERE
-    richiesta_acquisto.ID = id_richiesta;
+    richiesta_acquisto.ID = ra_ID;
 UPDATE utente 
 SET 
     num_richieste_associate = num_richieste_associate + 1
@@ -36,5 +36,5 @@ end \\
 
 delimiter ;
 
-CALL assegna_RA (2,1);
+CALL assegna_RA (1000);
 SELECT * FROM richiesta_acquisto;
