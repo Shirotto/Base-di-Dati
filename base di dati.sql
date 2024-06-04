@@ -29,7 +29,6 @@ CREATE TABLE prodotto_candidato (
     URL_info VARCHAR(2083),
     note VARCHAR(500),
     prezzo FLOAT UNSIGNED NOT NULL,
-    approvazione_prodotto_candidato ENUM('approvato','rifiutato','in valutazione')  NOT NULL DEFAULT 'in valutazione',
     stato_ordine_spedizione ENUM('ordine accettato','ordine rifutato','ordine in sospeso') NOT NULL DEFAULT 'ordine in sospeso'
 );
 
@@ -37,11 +36,13 @@ CREATE TABLE richiesta_acquisto (
     ID INTEGER PRIMARY KEY AUTO_INCREMENT,
     ID_utente INTEGER UNSIGNED NOT NULL,
     ID_prodottoass INTEGER UNSIGNED NULL,
-    totale FLOAT UNSIGNED DEFAULT NULL,
+    totale FLOAT UNSIGNED DEFAULT 0,
     `data` DATETIME NOT NULL,
-    note VARCHAR(500) DEFAULT NULL,
+    spedito_il DATETIME DEFAULT NULL,
+    note VARCHAR(500) DEFAULT '',
     tecnico_assegnato INTEGER UNSIGNED DEFAULT NULL,
     stato_richiesta ENUM('aperta', 'chiusa') NOT NULL DEFAULT 'aperta',
+	approvazione_prodotto_candidato ENUM('approvato','rifiutato','in valutazione') DEFAULT NULL,
     CONSTRAINT tecnico_assegnato FOREIGN KEY (ID_utente)
         REFERENCES utente (ID)
         ON UPDATE CASCADE,
@@ -51,7 +52,7 @@ CREATE TABLE richiesta_acquisto (
     CONSTRAINT prodotto_assegnato FOREIGN KEY (ID_prodottoass)
         REFERENCES prodotto_candidato (ID)
         ON UPDATE CASCADE
-);
+)AUTO_INCREMENT = 1000;
 
 CREATE TABLE categoria (
     ID INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
