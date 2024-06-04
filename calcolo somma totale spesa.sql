@@ -20,6 +20,7 @@ SUM(ra.totale) AS totale_richieste
         AND p.stato = 'ordinato'
         AND pc.stato_ordine_spedizione = 'ordine accettato'
         AND pc.approvazione_prodotto_candidato = 'approvato'
+         AND ra.data >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
         
         GROUP BY
     u.ID, u.nome, u.cognome;
