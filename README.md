@@ -162,35 +162,404 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 - Se necessario, riportate anche il codice delle procedure e/o viste di supporto.
 
+#### BASE DI DATI
+
+> Query di generazione tabelle
+
+```sql
+DROP DATABASE IF EXISTS market;
+CREATE DATABASE market;
+USE market;
+DROP TABLE IF EXISTS utente;
+DROP TABLE IF EXISTS richiesta_acquisto;
+DROP TABLE IF EXISTS propone;
+DROP TABLE IF EXISTS associa;
+DROP TABLE IF EXISTS categoria;
+DROP TABLE IF EXISTS specifica;
+DROP TABLE IF EXISTS prodotto_candidato;
+
+
+CREATE TABLE utente (
+    ID INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(200) NOT NULL,
+    cognome VARCHAR(200) NOT NULL,
+    indirizzo VARCHAR(200),
+    email VARCHAR(100) NOT NULL,
+    telefono VARCHAR(100) NOT NULL,
+    tipo ENUM('utente', 'amministratore','tecnico') NOT NULL DEFAULT 'utente',
+    num_richieste_associate INTEGER UNSIGNED not null default 0
+);
+
+CREATE TABLE prodotto_candidato (
+    ID INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nome_prodotto VARCHAR(200) NOT NULL,
+    nome_produttore VARCHAR(200) NOT NULL,
+    codice_prodotto INTEGER UNSIGNED NOT NULL UNIQUE,
+    URL_info VARCHAR(2083),
+    note VARCHAR(500),
+    prezzo FLOAT UNSIGNED NOT NULL,
+    stato_ordine_spedizione ENUM('ordine accettato','ordine rifutato','ordine in sospeso') NOT NULL DEFAULT 'ordine in sospeso'
+);
+
+CREATE TABLE richiesta_acquisto (
+    ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+    ID_utente INTEGER UNSIGNED NOT NULL,
+    ID_prodottoass INTEGER UNSIGNED NULL,
+    totale FLOAT UNSIGNED DEFAULT 0,
+    `data` DATETIME NOT NULL,
+    spedito_il DATETIME DEFAULT NULL,
+    note VARCHAR(500) DEFAULT '',
+    tecnico_assegnato INTEGER UNSIGNED DEFAULT NULL,
+    stato_richiesta ENUM('aperta', 'chiusa') NOT NULL DEFAULT 'aperta',
+	approvazione_prodotto_candidato ENUM('approvato','rifiutato','in valutazione') DEFAULT NULL,
+    CONSTRAINT tecnico_assegnato FOREIGN KEY (ID_utente)
+        REFERENCES utente (ID)
+        ON UPDATE CASCADE,
+    CONSTRAINT utente_assegnato FOREIGN KEY (ID_utente)
+        REFERENCES utente (ID)
+        ON UPDATE CASCADE,
+    CONSTRAINT prodotto_assegnato FOREIGN KEY (ID_prodottoass)
+        REFERENCES prodotto_candidato (ID)
+        ON UPDATE CASCADE
+)AUTO_INCREMENT = 1000;
+
+CREATE TABLE categoria (
+    ID INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL UNIQUE
+);
+CREATE TABLE specifica (
+    ID INTEGER UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(200) NOT NULL
+);
+
+CREATE TABLE propone (
+    stato ENUM('non ordinato','ordinato')  NOT NULL DEFAULT 'non ordinato',
+    ID_richiesta_acquisto INTEGER NOT NULL,
+    ID_prodotto_candidato INTEGER UNSIGNED NOT NULL,
+    CONSTRAINT propone_prodotto FOREIGN KEY (ID_prodotto_candidato)
+        REFERENCES prodotto_candidato (ID)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT associa_richiesta_acquisto FOREIGN KEY (ID_richiesta_acquisto)
+        REFERENCES richiesta_acquisto (ID)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY (ID_richiesta_acquisto , ID_prodotto_candidato)
+);
+
+CREATE TABLE seleziona (
+    ID_richiesta_acquisto INTEGER NOT NULL,
+    ID_categoria INTEGER UNSIGNED NOT NULL,
+    CONSTRAINT associa_categoria1 FOREIGN KEY (ID_categoria)
+        REFERENCES categoria (ID)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT associa_richiesta FOREIGN KEY (ID_richiesta_acquisto)
+        REFERENCES richiesta_acquisto (ID)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    PRIMARY KEY (ID_richiesta_acquisto , ID_categoria)
+);
+
+CREATE TABLE associa (
+    ID_categoria INTEGER UNSIGNED NOT NULL,
+    ID_richiesta_acquisto INTEGER NOT NULL,
+    ID_specifica INTEGER UNSIGNED NOT NULL,
+    quantità INT UNSIGNED NOT NULL,
+    CONSTRAINT richiesta_associata FOREIGN KEY (ID_richiesta_acquisto)
+    REFERENCES richiesta_acquisto (ID)
+    ON UPDATE CASCADE,
+    CONSTRAINT associa_categoria FOREIGN KEY (ID_categoria)
+        REFERENCES categoria (ID)
+        ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT associa_specifica FOREIGN KEY (ID_specifica)
+        REFERENCES specifica (ID)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+        
+    PRIMARY KEY (ID_categoria , ID_specifica)
+);
+
+INSERT INTO categoria(nome) VALUES ('PERSONAL COMPUTER');
+INSERT INTO categoria(nome) VALUES ('COMPUTER FISSI');
+INSERT INTO categoria(nome) VALUES ('COMPUTER DA GAMING');
+
+INSERT INTO specifica(nome) VALUES ('RAM');
+INSERT INTO specifica(nome) VALUES ('MEMORIA');
+INSERT INTO specifica(nome) VALUES ('HERTZ');
+
+
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Mario','Ranalli','via dei piedini anime','Marialliramario@mario.com','1043223232','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Marco','Nicolella','via qua sotto','Marconico@marco.com','0032323235','tecnico');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Antonio','sabatini','via lontanissimo','Antonioercriminale67@antonio.com','1458436984','amministratore');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Gianfranco','Bulgigatti','Via Pantano','Bulgipazzi@dfddfd.it','2121261627','tecnico');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Sandro','Di Biase','via Di Bitonto','Sandrinotp@fdffdf.com','1445118646','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Mario','Mariottide','Piazza Dei Poracci','Mariottide@ffdfdf.it','1848698184','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Fernandello','Mariottide','Dove Capita','Ferndy@dsdsd.com','3589147614','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Paolo','Cannone','Via Milano','Baolo@fdfd.it','4819813714','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Zeb','Ottantanove','Malta','Zebbone@emdem.com','1763489654','utente');
+INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Pietro','Smusi','Via dello sdunzo','Pietrosmusi@fdfdfd.it','947921314','tecnico');
+```
+
 #### Funzionalità 1
 
-> Definizione come da specifica
+> Creazione richiesta d'acquisto
 
 ```sql
-CODICE
+DELIMITER //
+CREATE PROCEDURE CreareRichiesta(
+ IN id_utente INT, categoria_selezionata VARCHAR(100), note_cliente VARCHAR(500), specifica_selezionata VARCHAR(500), quantità_specifica INT
+ )
+BEGIN 
+
+SELECT tipo INTO @tipoutente FROM utente WHERE ID = id_utente;
+
+IF @tipoutente = 'utente' THEN 
+
+-- Metodo per trovare ID della categoria 
+SELECT ID INTO @id_categoria FROM categoria WHERE nome = categoria_selezionata;
+
+SELECT ID INTO @id_specifica FROM specifica WHERE nome = specifica_selezionata;
+
+-- Metodo per inserire la rischiera con i valori
+INSERT INTO richiesta_acquisto (ID_utente, `data`,note)
+VALUES (id_utente, NOW(),note_cliente);
+
+-- Metodo per trovare ID della richista d'acquisto
+SET @ID_richiesta = LAST_INSERT_ID();
+
+-- Metodo per associare l' ID della richiesta all' ID della categoria
+INSERT INTO seleziona (ID_richiesta_acquisto, ID_categoria)
+VALUES (@ID_richiesta, @id_categoria);
+
+INSERT INTO associa (ID_categoria, ID_specifica,ID_richiesta_acquisto,quantità)
+VALUES (@id_categoria, @id_specifica,@ID_richiesta,quantità_specifica);
+
+    END IF;
+
+
+ END //
+        DELIMITER ;
+        
+CALL CreareRichiesta( 10 , 'PERSONAL COMPUTER','','RAM',16);
+CALL CreareRichiesta( 5 , 'PERSONAL COMPUTER','','MEMORIA',32);
+CALL CreareRichiesta( 6 , 'COMPUTER FISSI','no','HERTZ',60);
+SELECT * FROM richiesta_acquisto;
+SELECT * FROM categoria;
+SELECT * FROM seleziona;
+SELECT * FROM associa;
 ```
 
-#### Funzionalità 2
+#### Funzionalità 3
 
-> Definizione come da specifica
+> assegna tecnico
 
 ```sql
-CODICE
+create view Tecnici as    
+select ID, num_richieste_associate
+from utente
+where tipo = 'tecnico';
+
+
+delimiter \\
+
+CREATE PROCEDURE assegna_ra(IN ra_ID INTEGER)
+
+
+begin
+
+DECLARE tecnico INTEGER;
+
+SELECT 
+    ID
+INTO tecnico FROM
+    Tecnici
+GROUP BY Tecnici.ID
+ORDER BY Tecnici.num_richieste_associate ASC
+LIMIT 1;
+
+
+UPDATE richiesta_acquisto 
+SET 
+    tecnico_assegnato = tecnico
+WHERE
+    richiesta_acquisto.ID = ra_ID;
+UPDATE utente 
+SET 
+    num_richieste_associate = num_richieste_associate + 1
+WHERE
+    utente.ID = tecnico;
+end \\
+
+delimiter ;
+
+CALL assegna_RA (1000);
+SELECT * FROM richiesta_acquisto;
+
 ```
 
-## Interfaccia verso il database
+#### Funzionalità 4
 
-- Opzionalmente, se avete deciso di realizzare anche una **(semplice) interfaccia** (a linea di comando o grafica) in un linguaggio di programmazione a voi noto (Java, PHP, ...) che manipoli il vostro database , dichiaratelo in questa sezione, elencando
-  le tecnologie utilizzate e le funzionalità invocabili dall'interfaccia. 
+> inserisci prodotto
 
-- Il relativo codice sorgente dovrà essere *allegato *alla presente relazione.
+```sql
+-- Procedura usata dall tecnico per inserire il prodotto trovato nel sistema
+DELIMITER //
+CREATE PROCEDURE CercaProdotto(
+IN nome_prodotto VARCHAR(100),
+IN nome_produttore VARCHAR(100), 
+IN codice_prodotto INT, 
+IN url_prodotto VARCHAR(100),
+IN note VARCHAR(100),
+IN prezzo INT
+)
+BEGIN 
 
------
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES (nome_prodotto,nome_produttore,codice_prodotto,url_prodotto,note,prezzo);
 
-**Raccomandazioni finali**
+END //
+DELIMITER ;
 
-- Questo documento è un modello che spero possa esservi utile per scrivere la documentazione finale del vostro progetto di Laboratorio di Basi di Dati.
+CALL CercaProdotto('asis notebook','asis company',1,'www.asis','tastiera colorata',1080);
+CALL CercaProdotto('applo notebook','applo company',2,'www.indirizzo','telecamera',2000);
+CALL CercaProdotto('pera phone','pera inc',3,'www.pera','dedica',750);
+SELECT * FROM prodotto_candidato;
+```
 
-- Cercate di includere tutto il codice SQL nella documentazione, come indicato in questo modello, per facilitarne la correzione. Potete comunque allegare alla documentazione anche il *dump* del vostro database o qualsiasi altro elemento che ritenete utile ai fini della valutazione.
+#### Funzionalità 5
 
-- Ricordate che la documentazione deve essere consegnata, anche per email, almeno *una settimana prima* della data prevista per l'appello d'esame. Eventuali eccezioni a questa regola potranno essere concordate col docente.
+> proponi prodotto
+
+```sql
+DELIMITER //
+CREATE PROCEDURE ProponiProdotto(
+    IN id_richiesta INT,
+    IN id_prodotto INT
+)
+BEGIN    
+UPDATE richiesta_acquisto SET approvazione_prodotto_candidato = 'in valutazione' WHERE ID = id_richiesta;
+ -- Aggiunge alla richiesta d'acquisto il prodotto candidato
+UPDATE richiesta_acquisto SET ID_prodottoass = id_prodotto WHERE ID = id_richiesta;
+
+-- Aggiunge alla richiesta d'acquisto il prezzo del prodotto candidato
+SELECT prezzo INTO @prezzo FROM prodotto_candidato WHERE ID = id_prodotto;
+UPDATE richiesta_acquisto SET totale = @prezzo WHERE ID = id_richiesta;
+
+-- Aggiorna lo stato delle proposte di acquisto
+INSERT INTO propone (ID_richiesta_acquisto, ID_prodotto_candidato)
+VALUES (id_richiesta, id_prodotto);
+    
+END //
+
+DELIMITER ;
+CALL ProponiProdotto( 1000 , 2);
+CALL ProponiProdotto( 1001 , 2);
+select * FROM richiesta_acquisto;
+SELECT * FROM prodotto_candidato;
+SELECT * FROM propone;
+SELECT * FROM associa;
+```
+#### Funzionalità 6
+
+> approva prodotto
+
+```sql
+DELIMITER // 
+
+CREATE PROCEDURE ApprovaProdottoCandidato(
+   IN richiestaID INT
+)
+BEGIN
+    
+    UPDATE richiesta_acquisto SET approvazione_prodotto_candidato = 'approvato' WHERE richiesta_acquisto.ID = richiestaID;
+
+END //
+
+DELIMITER ;
+CALL ApprovaProdottoCandidato(1000);
+SELECT * FROM prodotto_candidato;
+SELECT * FROM richiesta_acquisto;
+```
+
+#### Funzionalità 7
+
+> spedisci prodotto
+
+```sql
+DELIMITER // 
+
+CREATE PROCEDURE SpedisciProdotto(
+   IN richiestaID INT
+)
+BEGIN
+    
+    UPDATE propone SET stato = 'ordinato' WHERE ID_richiesta_acquisto = richiestaID;
+    UPDATE richiesta_acquisto SET spedito_il = NOW() WHERE ID = richiestaID;
+
+END //
+
+DELIMITER ;
+CALL SpedisciProdotto(1000);
+SELECT * FROM propone;
+SELECT * FROM richiesta_acquisto;
+```
+
+#### Funzionalità 8
+
+> rifiuta prodotto
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE ProdottoRifiutato (
+    IN ID_richiesta INTEGER,IN note VARCHAR(500)
+)
+BEGIN
+
+UPDATE richiesta_acquisto SET approvazione_prodotto_candidato = 'rifiutato' WHERE ID = ID_richiesta;
+UPDATE richiesta_acquisto SET note = note WHERE ID = ID_richiesta;
+
+
+END //
+
+DELIMITER ;
+
+CALL ProdottoRifiutato(1000,'ho rifiutato perche la tastiera è brutta');
+SELECT * FROM richiesta_acquisto;
+```
+
+#### Funzionalità 9
+
+> elimina richiesta d'acquisto
+
+```sql
+SET SQL_SAFE_UPDATES = 0;
+
+-- Procedura usate per eliminare la richiesta d'acquisto nella sua tabella e anche nelle tabelle in cui appare
+DELIMITER //
+CREATE PROCEDURE EliminaRichiestaAcquisto(
+IN id_richiesta INT
+)
+BEGIN 
+
+DELETE FROM propone WHERE ID_richiesta_acquisto = id_richiesta;
+
+DELETE FROM seleziona WHERE ID_richiesta_acquisto = id_richiesta;
+
+DELETE FROM associa WHERE ID_richiesta_acquisto = id_richiesta;
+
+DELETE FROM richiesta_acquisto WHERE ID = id_richiesta;
+
+SELECT 'Richiesta eliminata' AS risultato;
+
+END //
+DELIMITER ;
+        
+CALL EliminaRichiestaAcquisto(1);
+
+
+SELECT * FROM richiesta_acquisto;
+SELECT * FROM propone;
+SELECT * FROM seleziona;
+SELECT * FROM associa;
+
+
+SET SQL_SAFE_UPDATES = 1;
+```
+
+
