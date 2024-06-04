@@ -16,19 +16,21 @@ BEGIN
         pc.URL_info,
         pc.note AS note_prodotto,
         pc.prezzo,
-        pc.approvazione_prodotto_candidato,
+        ra.approvazione_prodotto_candidato,
         pc.stato_ordine_spedizione,
         ra.totale,
         ra.`data`,
         ra.note AS note_richiesta,
         ra.tecnico_assegnato,
-        ra.stato_richiesta
+        ra.stato_richiesta,
+        p.stato
     FROM richiesta_acquisto ra
     LEFT JOIN utente u ON ra.ID_utente = u.ID
     LEFT JOIN prodotto_candidato pc ON ra.ID_prodottoass = pc.ID
+    LEFT JOIN propone p ON ra.ID = p.ID_richiesta_acquisto
     WHERE ra.ID = p_ID_richiesta ;
 END //
 
 DELIMITER ;
 
-call DettagliRichiestaAcquisto(1);
+call DettagliRichiestaAcquisto(1000);
