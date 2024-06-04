@@ -4,6 +4,7 @@ CREATE PROCEDURE ProponiProdotto(
     IN id_prodotto INT
 )
 BEGIN    
+UPDATE richiesta_acquisto SET approvazione_prodotto_candidato = 'in valutazione' WHERE ID = id_richiesta;
  -- Aggiunge alla richiesta d'acquisto il prodotto candidato
 UPDATE richiesta_acquisto SET ID_prodottoass = id_prodotto WHERE ID = id_richiesta;
 
@@ -18,7 +19,9 @@ VALUES (id_richiesta, id_prodotto);
 END //
 
 DELIMITER ;
-CALL ProponiProdotto( 1 , 2);
+CALL ProponiProdotto( 1000 , 2);
+CALL ProponiProdotto( 1001 , 2);
 select * FROM richiesta_acquisto;
 SELECT * FROM prodotto_candidato;
 SELECT * FROM propone;
+SELECT * FROM associa;
