@@ -562,4 +562,224 @@ SELECT * FROM associa;
 SET SQL_SAFE_UPDATES = 1;
 ```
 
+#### Funzionalità 10
+
+> lista richieste acquisto approvate ma non ancora spedite associate ad un tecnico
+
+```sql
+DELIMITER //
+CREATE PROCEDURE RichiestaAcquistoNonSpedito(
+IN id_tecnico INT
+)
+BEGIN 
+
+SELECT 
+ra.ID AS ID_richiesta,
+ra.ID_utente,
+ra.ID_prodottoass,
+ra.tecnico_assegnato,
+ra.`data`,
+ra.note,
+ra.stato_richiesta,
+pc.nome_prodotto,
+pc.codice_prodotto,
+ra.approvazione_prodotto_candidato,
+pc.stato_ordine_spedizione
+
+ FROM 
+        richiesta_acquisto ra
+        JOIN propone p ON ra.ID = p.ID_richiesta_acquisto
+        JOIN prodotto_candidato pc ON p.ID_prodotto_candidato = pc.ID
+    WHERE 
+        ra.tecnico_assegnato = id_tecnico
+        AND ra.approvazione_prodotto_candidato = 'approvato'
+        AND pc.stato_ordine_spedizione = 'ordine in sospeso';
+
+
+END //
+DELIMITER ;
+
+CALL RichiestaAcquistoNonSpedito(2);
+```
+#### Funzionalità 11
+
+> dettagli richiesta
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE DettagliRichiestaAcquisto (
+    IN p_ID_richiesta INTEGER
+)
+BEGIN
+    SELECT 
+        ra.ID AS ID_richiesta,
+        ra.ID_utente,
+        u.nome AS nome_utente,
+        u.cognome AS cognome_utente,
+        ra.ID_prodottoass,
+        pc.nome_prodotto,
+        pc.nome_produttore,
+        pc.codice_prodotto,
+        pc.URL_info,
+        pc.note AS note_prodotto,
+        pc.prezzo,
+        ra.approvazione_prodotto_candidato,
+        pc.stato_ordine_spedizione,
+        ra.totale,
+        ra.`data`,
+        ra.note AS note_richiesta,
+        ra.tecnico_assegnato,
+        ra.stato_richiesta,
+        p.stato
+    FROM richiesta_acquisto ra
+    LEFT JOIN utente u ON ra.ID_utente = u.ID
+    LEFT JOIN prodotto_candidato pc ON ra.ID_prodottoass = pc.ID
+    LEFT JOIN propone p ON ra.ID = p.ID_richiesta_acquisto
+    WHERE ra.ID = p_ID_richiesta ;
+END //
+
+DELIMITER ;
+
+call DettagliRichiestaAcquisto(1000);
+```
+#### Funzionalità 12
+
+> calcolo somma totale della spesa effettuata da un ordinante in un anno solare
+
+```sql
+DELIMITER //
+CREATE PROCEDURE CalcoloSommaOrdinante(
+IN id_utente INT
+)
+BEGIN 
+
+SELECT 
+u.ID,
+u.nome,
+u.cognome,
+SUM(ra.totale) AS totale_richieste
+ FROM 
+        richiesta_acquisto ra
+    JOIN utente u ON ra.ID_utente = u.ID
+    JOIN propone p ON ra.ID = p.ID_richiesta_acquisto
+    JOIN prodotto_candidato pc ON p.ID_prodotto_candidato = pc.ID
+    WHERE 
+        ra.ID_utente = id_utente
+        AND ra.stato_richiesta = 'chiusa'
+        AND p.stato = 'ordinato'
+        AND pc.stato_ordine_spedizione = 'ordine accettato'
+        AND pc.approvazione_prodotto_candidato = 'approvato'
+         AND ra.data >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+        
+        GROUP BY
+    u.ID, u.nome, u.cognome;
+
+
+END //
+DELIMITER ;
+
+CALL CalcoloSommaOrdinante(1);
+```
+#### Funzionalità 13
+
+> lista richieste d'acquisto non ancora associate ad un tecnico
+
+```sql
+-- Estrazione lista richiesta acquisto non ancora ssegate ad un tecnico
+DELIMITER //
+
+CREATE PROCEDURE RichiesteAqNonAss( 
+
+)
+
+BEGIN
+
+SELECT  u.nome, u.cognome, ra.ID, ra.ID_utente, ra.ID_prodottoass, ra.totale, ra.`data`,ra.note, ra.tecnico_assegnato, ra.stato_richiesta
+FROM richiesta_acquisto ra
+JOIN utente u ON ra.ID_utente = u.ID
+WHERE ra.tecnico_assegnato IS NULL;
+
+END //
+
+DELIMITER ;
+
+CALL RichiesteAqNonAss();
+```
+#### Funzionalità 14
+
+> conteggio richieste d'acquisto gestite globalmente da un tecnico
+
+```sql
+-- Conteggio richieste acquisto gestite globalmente da un determinato tecnico
+DELIMITER //
+
+CREATE PROCEDURE NRGTecnico(
+
+IN tecnicoID INTEGER 
+
+)
+
+BEGIN
+
+SELECT u.nome, u.cognome,
+
+COUNT(ra.ID) AS Numero_Richieste
+
+FROM richiesta_acquisto ra
+JOIN utente u ON ra.tecnico_assegnato = u.ID
+WHERE ra.tecnico_assegnato = tecnicoID
+
+GROUP BY u.nome, u.cognome;
+
+
+END //
+
+
+
+DELIMITER ;
+CALL NRGTecnico(2);
+```
+#### Funzionalità 15
+
+> richieste di un ordinante in sospeso
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE RANC_Ordinante (IN ID_Ordinante INTEGER UNSIGNED)
+BEGIN
+    SELECT * FROM richiesta_acquisto WHERE richiesta_acquisto.ID_utente = ID_Ordinante
+      AND stato_richiesta = 'aperta'
+      AND approvazione_prodotto_candidato = 'in valutazione';
+END //
+
+DELIMITER ;
+
+
+CALL RANC_Ordinante(6);
+```
+#### Funzionalità 16
+
+> calcolo tempo medio evasione ordine
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE CalcolaTempoMedioEvasione()
+BEGIN
+    SELECT AVG(TIMESTAMPDIFF(SECOND, `data`, spedito_il)) AS tempo_medio_evasione_sec
+    FROM richiesta_acquisto
+    WHERE spedito_il IS NOT NULL;
+END //
+
+DELIMITER ;
+
+call CalcolaTempoMedioEvasione();
+
+
+
+select * FROM richiesta_acquisto;
+```
+
 
