@@ -107,7 +107,8 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 ## Progettazione concettuale
 
-[Diagramma vuoto.pdf](https://github.com/user-attachments/files/15582906/Diagramma.vuoto.pdf)
+![Diagramma ER](https://github.com/Shirotto/Base-di-Dati/assets/127602582/d0a40361-c8a9-4242-af0f-43292b388f70)
+
 
 
 - Commentate gli elementi non visibili nella figura (ad esempio il contenuto degli attributi composti) nonché le scelte/assunzioni che vi hanno portato a creare determinate strutture, se lo ritenete opportuno.
