@@ -136,10 +136,8 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 ### Traduzione del modello ER nel modello relazionale
 
-- Riportate qui il **modello relazionale** finale, derivato dal modello ER ristrutturato della sezione precedente e che verrà implementato in SQL in quella successiva. 
+![Modello relazionale](https://github.com/Shirotto/Base-di-Dati/assets/127602582/a0ae5193-8af9-4c14-bd46-93e769596059)
 
-- Nel modello evidenziate le chiavi primarie e le chiavi esterne.
-![Modello relazionale](https://github.com/Shirotto/Base-di-Dati/assets/127602582/c9ec5a9e-f47c-4d89-948e-0454c9184de7)
 
 
 ## Progettazione fisica
