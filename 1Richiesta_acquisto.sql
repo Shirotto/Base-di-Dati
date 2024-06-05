@@ -27,6 +27,20 @@ VALUES (@ID_richiesta, @id_categoria);
 INSERT INTO associa (ID_categoria, ID_specifica,ID_richiesta_acquisto,quantità)
 VALUES (@id_categoria, @id_specifica,@ID_richiesta,quantità_specifica);
 
+ SELECT 
+    a.ID_richiesta_acquisto AS Richiesta_ID,
+    c.nome AS Categoria,
+    s.nome AS Specifica,
+    a.quantità AS Quantità
+FROM
+    associa a
+        JOIN
+    categoria c ON a.ID_categoria = c.ID
+        JOIN
+    specifica s ON a.ID_specifica = s.ID
+WHERE
+    a.ID_richiesta_acquisto = @ID_richiesta;
+
     END IF;
 
 
