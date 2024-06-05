@@ -127,8 +127,8 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 ### Ristrutturazione ed ottimizzazione del modello ER
 
-- Riportate qui il modello **ER ristrutturato** ed eventualmente ottimizzato.
-![Diagramma Er Ristrutturato](https://github.com/Shirotto/Base-di-Dati/assets/127602582/fd28f30e-de0a-4b7c-aebc-b0aea08d7c29)
+![Diagramma Er Ristrutturato](https://github.com/Shirotto/Base-di-Dati/assets/127602582/7eea605f-058c-4bd0-ab0e-9fed31a62b81)
+
 
 
 - Discutete le scelte effettuate, ad esempio nell'eliminare una generalizzazione o nello scindere un'entità.
