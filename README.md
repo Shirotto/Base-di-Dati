@@ -4,9 +4,9 @@
 
 | Matricola | Nome | Cognome | Contributo al progetto |
 |:---------:|:----:|:-------:|:----------------------:|
-|    285246 | Antonio     | sabatini        |                     |
-|     285714      |    Mario  |      Ranalli   |             |
-|     265332     |    Marco  |      Nicolella   |                     |
+|    285246 | Antonio     | sabatini        |      40%               |
+|     285714      |    Mario  |      Ranalli   |      30%       |
+|     265332     |    Marco  |      Nicolella   |        30%             |
 
 **Data di consegna del progetto**: gg/mm/aaaa
 
