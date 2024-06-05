@@ -295,7 +295,7 @@ INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Zeb','Ot
 INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Pietro','Smusi','Via dello sdunzo','Pietrosmusi@fdfdfd.it','947921314','tecnico');
 ```
 
-#### Funzionalità 1
+#### Funzionalità 1 RICHIESTA 1
 
 > Creazione richiesta d'acquisto
 
@@ -356,7 +356,7 @@ WHERE
         DELIMITER ;
 ```
 
-#### Funzionalità 3
+#### Funzionalità 2 RICHIESTA 2
 
 > assegna tecnico
 
@@ -404,7 +404,7 @@ SELECT * FROM richiesta_acquisto;
 
 ```
 
-#### Funzionalità 4
+#### Funzionalità 3 EXTRA
 
 > inserisci prodotto
 
@@ -432,7 +432,7 @@ CALL CercaProdotto('pera phone','pera inc',3,'www.pera','dedica',750);
 SELECT * FROM prodotto_candidato;
 ```
 
-#### Funzionalità 5
+#### Funzionalità 4 EXTRA
 
 > proponi prodotto
 
@@ -465,7 +465,7 @@ SELECT * FROM prodotto_candidato;
 SELECT * FROM propone;
 SELECT * FROM associa;
 ```
-#### Funzionalità 6
+#### Funzionalità 5 RICHIESTA 3
 
 > approva prodotto
 
@@ -487,7 +487,7 @@ SELECT * FROM prodotto_candidato;
 SELECT * FROM richiesta_acquisto;
 ```
 
-#### Funzionalità 7
+#### Funzionalità 6 EXTRA
 
 > spedisci prodotto
 
@@ -510,7 +510,7 @@ SELECT * FROM propone;
 SELECT * FROM richiesta_acquisto;
 ```
 
-#### Funzionalità 8
+#### Funzionalità 7 EXTRA
 
 > rifiuta prodotto
 
@@ -534,7 +534,7 @@ CALL ProdottoRifiutato(1000,'ho rifiutato perche la tastiera è brutta');
 SELECT * FROM richiesta_acquisto;
 ```
 
-#### Funzionalità 9
+#### Funzionalità 8 RICHIESTA 4
 
 > elimina richiesta d'acquisto
 
@@ -573,7 +573,7 @@ SELECT * FROM associa;
 SET SQL_SAFE_UPDATES = 1;
 ```
 
-#### Funzionalità 10
+#### Funzionalità 9 RICHIESTA 7
 
 > lista richieste acquisto approvate ma non ancora spedite associate ad un tecnico
 
@@ -612,7 +612,7 @@ DELIMITER ;
 
 CALL RichiestaAcquistoNonSpedito(2);
 ```
-#### Funzionalità 11
+#### Funzionalità 10 RICHIESTA 8
 
 > dettagli richiesta
 
@@ -654,7 +654,7 @@ DELIMITER ;
 
 call DettagliRichiestaAcquisto(1000);
 ```
-#### Funzionalità 12
+#### Funzionalità 11 RICHIESTA 10
 
 > calcolo somma totale della spesa effettuata da un ordinante in un anno solare
 
@@ -692,7 +692,7 @@ DELIMITER ;
 
 CALL CalcoloSommaOrdinante(1);
 ```
-#### Funzionalità 13
+#### Funzionalità 12 RICHIESTA 6
 
 > lista richieste d'acquisto non ancora associate ad un tecnico
 
@@ -717,7 +717,7 @@ DELIMITER ;
 
 CALL RichiesteAqNonAss();
 ```
-#### Funzionalità 14
+#### Funzionalità 13 RICHIESTA 9
 
 > conteggio richieste d'acquisto gestite globalmente da un tecnico
 
@@ -751,7 +751,7 @@ END //
 DELIMITER ;
 CALL NRGTecnico(2);
 ```
-#### Funzionalità 15
+#### Funzionalità 14 RICHIESTA 5
 
 > richieste di un ordinante in sospeso
 
@@ -770,7 +770,7 @@ DELIMITER ;
 
 CALL RANC_Ordinante(6);
 ```
-#### Funzionalità 16
+#### Funzionalità 15 RICHIESTA 11
 
 > calcolo tempo medio evasione ordine
 
