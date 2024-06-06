@@ -293,7 +293,7 @@ INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Zeb','Ot
 INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Pietro','Smusi','Via dello sdunzo','Pietrosmusi@fdfdfd.it','947921314','tecnico');
 ```
 
-#### Funzionalità 1 RICHIESTA 1
+#### FUNZIONALITA' RICHIESTA 1
 
 > Creazione richiesta d'acquisto
 
@@ -354,7 +354,7 @@ WHERE
         DELIMITER ;
 ```
 
-#### Funzionalità 2 RICHIESTA 2
+#### FUNZIONALITA' RICHIESTA 2
 
 > assegna tecnico
 
@@ -401,69 +401,7 @@ CALL assegna_RA (1000);
 SELECT * FROM richiesta_acquisto;
 
 ```
-
-#### Funzionalità 3 EXTRA
-
-> inserisci prodotto
-
-```sql
--- Procedura usata dall tecnico per inserire il prodotto trovato nel sistema
-DELIMITER //
-CREATE PROCEDURE CercaProdotto(
-IN nome_prodotto VARCHAR(100),
-IN nome_produttore VARCHAR(100), 
-IN codice_prodotto INT, 
-IN url_prodotto VARCHAR(100),
-IN note VARCHAR(100),
-IN prezzo INT
-)
-BEGIN 
-
-INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES (nome_prodotto,nome_produttore,codice_prodotto,url_prodotto,note,prezzo);
-
-END //
-DELIMITER ;
-
-CALL CercaProdotto('asis notebook','asis company',1,'www.asis','tastiera colorata',1080);
-CALL CercaProdotto('applo notebook','applo company',2,'www.indirizzo','telecamera',2000);
-CALL CercaProdotto('pera phone','pera inc',3,'www.pera','dedica',750);
-SELECT * FROM prodotto_candidato;
-```
-
-#### Funzionalità 4 EXTRA
-
-> proponi prodotto
-
-```sql
-DELIMITER //
-CREATE PROCEDURE ProponiProdotto(
-    IN id_richiesta INT,
-    IN id_prodotto INT
-)
-BEGIN    
-UPDATE richiesta_acquisto SET approvazione_prodotto_candidato = 'in valutazione' WHERE ID = id_richiesta;
- -- Aggiunge alla richiesta d'acquisto il prodotto candidato
-UPDATE richiesta_acquisto SET ID_prodottoass = id_prodotto WHERE ID = id_richiesta;
-
--- Aggiunge alla richiesta d'acquisto il prezzo del prodotto candidato
-SELECT prezzo INTO @prezzo FROM prodotto_candidato WHERE ID = id_prodotto;
-UPDATE richiesta_acquisto SET totale = @prezzo WHERE ID = id_richiesta;
-
--- Aggiorna lo stato delle proposte di acquisto
-INSERT INTO propone (ID_richiesta_acquisto, ID_prodotto_candidato)
-VALUES (id_richiesta, id_prodotto);
-    
-END //
-
-DELIMITER ;
-CALL ProponiProdotto( 1000 , 2);
-CALL ProponiProdotto( 1001 , 2);
-select * FROM richiesta_acquisto;
-SELECT * FROM prodotto_candidato;
-SELECT * FROM propone;
-SELECT * FROM associa;
-```
-#### Funzionalità 5 RICHIESTA 3
+#### FUNZIONALITA' RICHIESTA 3
 
 > approva prodotto
 
@@ -484,55 +422,7 @@ CALL ApprovaProdottoCandidato(1000);
 SELECT * FROM prodotto_candidato;
 SELECT * FROM richiesta_acquisto;
 ```
-
-#### Funzionalità 6 EXTRA
-
-> spedisci prodotto
-
-```sql
-DELIMITER // 
-
-CREATE PROCEDURE SpedisciProdotto(
-   IN richiestaID INT
-)
-BEGIN
-    
-    UPDATE propone SET stato = 'ordinato' WHERE ID_richiesta_acquisto = richiestaID;
-    UPDATE richiesta_acquisto SET spedito_il = NOW() WHERE ID = richiestaID;
-
-END //
-
-DELIMITER ;
-CALL SpedisciProdotto(1000);
-SELECT * FROM propone;
-SELECT * FROM richiesta_acquisto;
-```
-
-#### Funzionalità 7 EXTRA
-
-> rifiuta prodotto
-
-```sql
-DELIMITER //
-
-CREATE PROCEDURE ProdottoRifiutato (
-    IN ID_richiesta INTEGER,IN note VARCHAR(500)
-)
-BEGIN
-
-UPDATE richiesta_acquisto SET approvazione_prodotto_candidato = 'rifiutato' WHERE ID = ID_richiesta;
-UPDATE richiesta_acquisto SET note = note WHERE ID = ID_richiesta;
-
-
-END //
-
-DELIMITER ;
-
-CALL ProdottoRifiutato(1000,'ho rifiutato perche la tastiera è brutta');
-SELECT * FROM richiesta_acquisto;
-```
-
-#### Funzionalità 8 RICHIESTA 4
+#### FUNZONALITA' RICHIESTA 4
 
 > elimina richiesta d'acquisto
 
@@ -569,9 +459,107 @@ SELECT * FROM associa;
 
 
 SET SQL_SAFE_UPDATES = 1;
+
+#### Funzionalità 6 EXTRA
+
+> spedisci prodotto
+
+```sql
+DELIMITER // 
+
+CREATE PROCEDURE SpedisciProdotto(
+   IN richiestaID INT
+)
+BEGIN
+    
+    UPDATE propone SET stato = 'ordinato' WHERE ID_richiesta_acquisto = richiestaID;
+    UPDATE richiesta_acquisto SET spedito_il = NOW() WHERE ID = richiestaID;
+
+END //
+
+DELIMITER ;
+CALL SpedisciProdotto(1000);
+SELECT * FROM propone;
+SELECT * FROM richiesta_acquisto;
+
+#### Funzionalità 3 EXTRA
+
+> inserisci prodotto
+
+```sql
+-- Procedura usata dall tecnico per inserire il prodotto trovato nel sistema
+DELIMITER //
+CREATE PROCEDURE CercaProdotto(
+IN nome_prodotto VARCHAR(100),
+IN nome_produttore VARCHAR(100), 
+IN codice_prodotto INT, 
+IN url_prodotto VARCHAR(100),
+IN note VARCHAR(100),
+IN prezzo INT
+)
+BEGIN 
+
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES (nome_prodotto,nome_produttore,codice_prodotto,url_prodotto,note,prezzo);
+
+END //
+DELIMITER ;
+
+CALL CercaProdotto('asis notebook','asis company',1,'www.asis','tastiera colorata',1080);
+CALL CercaProdotto('applo notebook','applo company',2,'www.indirizzo','telecamera',2000);
+CALL CercaProdotto('pera phone','pera inc',3,'www.pera','dedica',750);
+SELECT * FROM prodotto_candidato;
+
 ```
 
-#### Funzionalità 9 RICHIESTA 7
+#### FUNZIONALITA' RICHIESTA 5
+
+> richieste di un ordinante in sospeso
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE RANC_Ordinante (IN ID_Ordinante INTEGER UNSIGNED)
+BEGIN
+    SELECT * FROM richiesta_acquisto WHERE richiesta_acquisto.ID_utente = ID_Ordinante
+      AND stato_richiesta = 'aperta'
+      AND approvazione_prodotto_candidato = 'in valutazione';
+END //
+
+DELIMITER ;
+
+
+CALL RANC_Ordinante(6);
+
+```
+
+#### FUNZIONALITA' RICHIESTA 6
+
+> lista richieste d'acquisto non ancora associate ad un tecnico
+
+```sql
+-- Estrazione lista richiesta acquisto non ancora ssegate ad un tecnico
+DELIMITER //
+
+CREATE PROCEDURE RichiesteAqNonAss( 
+
+)
+
+BEGIN
+
+SELECT  u.nome, u.cognome, ra.ID, ra.ID_utente, ra.ID_prodottoass, ra.totale, ra.`data`,ra.note, ra.tecnico_assegnato, ra.stato_richiesta
+FROM richiesta_acquisto ra
+JOIN utente u ON ra.ID_utente = u.ID
+WHERE ra.tecnico_assegnato IS NULL;
+
+END //
+
+DELIMITER ;
+
+CALL RichiesteAqNonAss();
+
+```
+
+#### FUNZIONALITA' RICHIESTA 7
 
 > lista richieste acquisto approvate ma non ancora spedite associate ad un tecnico
 
@@ -609,8 +597,10 @@ END //
 DELIMITER ;
 
 CALL RichiestaAcquistoNonSpedito(2);
+
 ```
-#### Funzionalità 10 RICHIESTA 8
+
+#### FUNZIONALITA' RICHIESTA 8
 
 > dettagli richiesta
 
@@ -651,8 +641,46 @@ END //
 DELIMITER ;
 
 call DettagliRichiestaAcquisto(1000);
+
 ```
-#### Funzionalità 11 RICHIESTA 10
+
+#### FUNZIONALITA' RICHIESTA 9
+
+> conteggio richieste d'acquisto gestite globalmente da un tecnico
+
+```sql
+-- Conteggio richieste acquisto gestite globalmente da un determinato tecnico
+DELIMITER //
+
+CREATE PROCEDURE NRGTecnico(
+
+IN tecnicoID INTEGER 
+
+)
+
+BEGIN
+
+SELECT u.nome, u.cognome,
+
+COUNT(ra.ID) AS Numero_Richieste
+
+FROM richiesta_acquisto ra
+JOIN utente u ON ra.tecnico_assegnato = u.ID
+WHERE ra.tecnico_assegnato = tecnicoID
+
+GROUP BY u.nome, u.cognome;
+
+
+END //
+
+
+
+DELIMITER ;
+CALL NRGTecnico(2);
+
+```
+
+#### FUNZIONALITA' RICHIESTA 10
 
 > calcolo somma totale della spesa effettuata da un ordinante in un anno solare
 
@@ -689,86 +717,10 @@ END //
 DELIMITER ;
 
 CALL CalcoloSommaOrdinante(1);
+
 ```
-#### Funzionalità 12 RICHIESTA 6
 
-> lista richieste d'acquisto non ancora associate ad un tecnico
-
-```sql
--- Estrazione lista richiesta acquisto non ancora ssegate ad un tecnico
-DELIMITER //
-
-CREATE PROCEDURE RichiesteAqNonAss( 
-
-)
-
-BEGIN
-
-SELECT  u.nome, u.cognome, ra.ID, ra.ID_utente, ra.ID_prodottoass, ra.totale, ra.`data`,ra.note, ra.tecnico_assegnato, ra.stato_richiesta
-FROM richiesta_acquisto ra
-JOIN utente u ON ra.ID_utente = u.ID
-WHERE ra.tecnico_assegnato IS NULL;
-
-END //
-
-DELIMITER ;
-
-CALL RichiesteAqNonAss();
-```
-#### Funzionalità 13 RICHIESTA 9
-
-> conteggio richieste d'acquisto gestite globalmente da un tecnico
-
-```sql
--- Conteggio richieste acquisto gestite globalmente da un determinato tecnico
-DELIMITER //
-
-CREATE PROCEDURE NRGTecnico(
-
-IN tecnicoID INTEGER 
-
-)
-
-BEGIN
-
-SELECT u.nome, u.cognome,
-
-COUNT(ra.ID) AS Numero_Richieste
-
-FROM richiesta_acquisto ra
-JOIN utente u ON ra.tecnico_assegnato = u.ID
-WHERE ra.tecnico_assegnato = tecnicoID
-
-GROUP BY u.nome, u.cognome;
-
-
-END //
-
-
-
-DELIMITER ;
-CALL NRGTecnico(2);
-```
-#### Funzionalità 14 RICHIESTA 5
-
-> richieste di un ordinante in sospeso
-
-```sql
-DELIMITER //
-
-CREATE PROCEDURE RANC_Ordinante (IN ID_Ordinante INTEGER UNSIGNED)
-BEGIN
-    SELECT * FROM richiesta_acquisto WHERE richiesta_acquisto.ID_utente = ID_Ordinante
-      AND stato_richiesta = 'aperta'
-      AND approvazione_prodotto_candidato = 'in valutazione';
-END //
-
-DELIMITER ;
-
-
-CALL RANC_Ordinante(6);
-```
-#### Funzionalità 15 RICHIESTA 11
+#### FUNZIONALITA' RICHIESTA 11
 
 > calcolo tempo medio evasione ordine
 
@@ -789,6 +741,127 @@ call CalcolaTempoMedioEvasione();
 
 
 select * FROM richiesta_acquisto;
+
 ```
+
+#### FUNZIONALITA' EXTRA 1
+
+> proponi prodotto
+
+```sql
+DELIMITER //
+CREATE PROCEDURE ProponiProdotto(
+    IN id_richiesta INT,
+    IN id_prodotto INT
+)
+BEGIN    
+UPDATE richiesta_acquisto SET approvazione_prodotto_candidato = 'in valutazione' WHERE ID = id_richiesta;
+ -- Aggiunge alla richiesta d'acquisto il prodotto candidato
+UPDATE richiesta_acquisto SET ID_prodottoass = id_prodotto WHERE ID = id_richiesta;
+
+-- Aggiunge alla richiesta d'acquisto il prezzo del prodotto candidato
+SELECT prezzo INTO @prezzo FROM prodotto_candidato WHERE ID = id_prodotto;
+UPDATE richiesta_acquisto SET totale = @prezzo WHERE ID = id_richiesta;
+
+-- Aggiorna lo stato delle proposte di acquisto
+INSERT INTO propone (ID_richiesta_acquisto, ID_prodotto_candidato)
+VALUES (id_richiesta, id_prodotto);
+    
+END //
+
+DELIMITER ;
+CALL ProponiProdotto( 1000 , 2);
+CALL ProponiProdotto( 1001 , 2);
+select * FROM richiesta_acquisto;
+SELECT * FROM prodotto_candidato;
+SELECT * FROM propone;
+SELECT * FROM associa;
+```
+
+#### FUNZIONALITA' EXTRA 2
+
+> spedisci prodotto
+
+```sql
+DELIMITER // 
+
+CREATE PROCEDURE SpedisciProdotto(
+   IN richiestaID INT
+)
+BEGIN
+    
+    UPDATE propone SET stato = 'ordinato' WHERE ID_richiesta_acquisto = richiestaID;
+    UPDATE richiesta_acquisto SET spedito_il = NOW() WHERE ID = richiestaID;
+
+END //
+
+DELIMITER ;
+CALL SpedisciProdotto(1000);
+SELECT * FROM propone;
+SELECT * FROM richiesta_acquisto;
+```
+
+#### FUNZIONALITA' EXTRA 3
+
+> rifiuta prodotto
+
+```sql
+DELIMITER //
+
+CREATE PROCEDURE ProdottoRifiutato (
+    IN ID_richiesta INTEGER,IN note VARCHAR(500)
+)
+BEGIN
+
+UPDATE richiesta_acquisto SET approvazione_prodotto_candidato = 'rifiutato' WHERE ID = ID_richiesta;
+UPDATE richiesta_acquisto SET note = note WHERE ID = ID_richiesta;
+
+
+END //
+
+DELIMITER ;
+
+CALL ProdottoRifiutato(1000,'ho rifiutato perche la tastiera è brutta');
+SELECT * FROM richiesta_acquisto;
+
+
+```
+
+#### FUNZIONALITA' EXTRA 4 
+
+> inserisci prodotto
+
+-- Procedura usata dall tecnico per inserire il prodotto trovato nel sistema
+DELIMITER //
+CREATE PROCEDURE CercaProdotto(
+IN nome_prodotto VARCHAR(100),
+IN nome_produttore VARCHAR(100), 
+IN codice_prodotto INT, 
+IN url_prodotto VARCHAR(100),
+IN note VARCHAR(100),
+IN prezzo INT
+)
+BEGIN 
+
+INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES (nome_prodotto,nome_produttore,codice_prodotto,url_prodotto,note,prezzo);
+
+END //
+DELIMITER ;
+
+CALL CercaProdotto('asis notebook','asis company',1,'www.asis','tastiera colorata',1080);
+CALL CercaProdotto('applo notebook','applo company',2,'www.indirizzo','telecamera',2000);
+CALL CercaProdotto('pera phone','pera inc',3,'www.pera','dedica',750);
+SELECT * FROM prodotto_candidato;
+
+
+```
+
+
+
+
+
+
+
+
 
 
