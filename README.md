@@ -831,6 +831,7 @@ SELECT * FROM richiesta_acquisto;
 
 > inserisci prodotto
 
+```sql
 -- Procedura usata dall tecnico per inserire il prodotto trovato nel sistema
 DELIMITER //
 CREATE PROCEDURE CercaProdotto(
