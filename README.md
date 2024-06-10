@@ -535,9 +535,9 @@ CALL RANC_Ordinante(6);
 #### FUNZIONALITA' RICHIESTA 6
 
 > lista richieste d'acquisto non ancora associate ad un tecnico
+> 
 
 ```sql
--- Estrazione lista richiesta acquisto non ancora ssegate ad un tecnico
 DELIMITER //
 
 CREATE PROCEDURE RichiesteAqNonAss( 
@@ -561,7 +561,8 @@ CALL RichiesteAqNonAss();
 
 #### FUNZIONALITA' RICHIESTA 7
 
-> lista richieste acquisto approvate ma non ancora spedite associate ad un tecnico
+> lista richieste acquisto, approvate ma non ancora spedite, associate ad uno specifico tecnico
+> Vengono selezionati i dati fondamentali della richiesta d'acquisto e i dati che identificano i prodotti ad esse associate. 
 
 ```sql
 DELIMITER //
@@ -602,7 +603,8 @@ CALL RichiestaAcquistoNonSpedito(2);
 
 #### FUNZIONALITA' RICHIESTA 8
 
-> dettagli richiesta
+> dettagli di una determinata richiesta d'acquisto
+> selezioniamo più dettagli possibili dalla richiesta e da eventuali entità (prodotti,tecnico,cliente) associate ad essa.
 
 ```sql
 DELIMITER //
@@ -646,10 +648,9 @@ call DettagliRichiestaAcquisto(1000);
 
 #### FUNZIONALITA' RICHIESTA 9
 
-> conteggio richieste d'acquisto gestite globalmente da un tecnico
+> conteggio richieste d'acquisto gestite globalmente da un determinato tecnico
 
 ```sql
--- Conteggio richieste acquisto gestite globalmente da un determinato tecnico
 DELIMITER //
 
 CREATE PROCEDURE NRGTecnico(
@@ -682,7 +683,7 @@ CALL NRGTecnico(2);
 
 #### FUNZIONALITA' RICHIESTA 10
 
-> calcolo somma totale della spesa effettuata da un ordinante in un anno solare
+> calcolo della spesa totale effettuata da un ordinante in un anno solare
 
 ```sql
 DELIMITER //
@@ -722,7 +723,8 @@ CALL CalcoloSommaOrdinante(1);
 
 #### FUNZIONALITA' RICHIESTA 11
 
-> calcolo tempo medio evasione ordine
+> calcolo del tempo medio evasione ordine
+> Il tempo medio viene calcolato mediante "data" e "spedito il" che rappresentano rispettivamente la data di creazione della richiesta d'acquisto e il momento della spedizione del prodotto
 
 ```sql
 DELIMITER //
@@ -746,7 +748,7 @@ select * FROM richiesta_acquisto;
 
 #### FUNZIONALITA' EXTRA 1
 
-> proponi prodotto
+> Procedura per la registrazione di una proposta per un prodotto candidato
 
 ```sql
 DELIMITER //
@@ -780,7 +782,7 @@ SELECT * FROM associa;
 
 #### FUNZIONALITA' EXTRA 2
 
-> spedisci prodotto
+> procedura per la spedizione del prodotto
 
 ```sql
 DELIMITER // 
@@ -803,7 +805,7 @@ SELECT * FROM richiesta_acquisto;
 
 #### FUNZIONALITA' EXTRA 3
 
-> rifiuta prodotto
+> rifiuto del prodotto da parte del compratore
 
 ```sql
 DELIMITER //
@@ -830,9 +832,9 @@ SELECT * FROM richiesta_acquisto;
 #### FUNZIONALITA' EXTRA 4 
 
 > inserisci prodotto
+> Procedura usata dall tecnico per inserire il prodotto trovato nel sistema
 
 ```sql
--- Procedura usata dall tecnico per inserire il prodotto trovato nel sistema
 DELIMITER //
 CREATE PROCEDURE CercaProdotto(
 IN nome_prodotto VARCHAR(100),
