@@ -118,8 +118,6 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 
 ### Formalizzazione dei vincoli non esprimibili nel modello ER
-
-- Elencate gli altri **vincoli** sui dati che avete individuato e che non possono essere espressi nel diagramma ER.
 - VINCOLO DI ACCESSO E MODIFICA "RICHIESTA D'ACQUISTO"--> Il sistema prevede che un utente sia direttamente collegato ad una o più richieste d'acquisto, ma non tutti gli utenti ne hanno accesso allo stesso modo. Distinguiamo tre tipi di utente: tecnico, compratore e amministratore. Il "tecnico" avrà visione completa della "richiesta d'acquisto" ma potrà modificare solo il "prodotto candidato" presente in essa, aggiungendo un nuovo prodotto candidato o sostituendo quello vecchio in caso di necessità. Il "compratore", invece, avrà completo accesso alla r.a. e potra modificare i parametri a proprio piacimento in qualsiasi momento, non avrà ovviamente accesso al "prodotto candidato". Potrà, infine, chiudere la r.a. al termine del processo di acquisto o in qualsiasi momento lo desideri.
 
 
@@ -129,9 +127,6 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 ![Diagramma Er Ristrutturato](https://github.com/Shirotto/Base-di-Dati/assets/127602582/7eea605f-058c-4bd0-ab0e-9fed31a62b81)
 
-
-
-- Discutete le scelte effettuate, ad esempio nell'eliminare una generalizzazione o nello scindere un'entità.
 - RIMOZIONE GENERALIZZAZIONE UTENTE: Considerando che tutti gli utenti condividono gli stessi attributi, abbiamo deciso di consolidarli in un'unica entità per semplificare la gestione. Per distinguere i vari tipi di utenti all'interno di questa entità consolidata, abbiamo introdotto un nuovo attributo denominato "Tipo". Questo attributo ci permette di identificare e differenziare chiaramente i diversi tipi di utenti, garantendo al contempo una struttura dati più efficiente e organizzata.
 
 ### Traduzione del modello ER nel modello relazionale
@@ -144,10 +139,6 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 ### Implementazione del modello relazionale
 
-- Inserite qui lo *script SQL* con cui **creare il database** il cui modello relazionale è stato illustrato nella sezione precedente. Ricordate di includere nel codice tutti
-  i vincoli che possono essere espressi nel DDL. 
-
-- Potete opzionalmente fornire anche uno script separato di popolamento (INSERT) del database su cui basare i test delle query descritte nella sezione successiva.
 
 ### Implementazione dei vincoli
 
@@ -155,9 +146,7 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 ### Implementazione funzionalità richieste
 
-- Riportate qui il **codice che implementa tutte le funzionalità richieste**, che si tratti di SQL o di pseudocodice o di entrambi. *Il codice di ciascuna funzionalità dovrà essere preceduto dal suo numero identificativo e dal testo della sua definizione*, come riportato nella specifica.
 
-- Se necessario, riportate anche il codice delle procedure e/o viste di supporto.
 
 #### BASE DI DATI
 
@@ -534,8 +523,7 @@ CALL RANC_Ordinante(6);
 
 #### FUNZIONALITA' RICHIESTA 6
 
-> lista richieste d'acquisto non ancora associate ad un tecnico
-> 
+> lista richieste d'acquisto non ancora associate a nessun tecnico
 
 ```sql
 DELIMITER //
@@ -561,7 +549,7 @@ CALL RichiesteAqNonAss();
 
 #### FUNZIONALITA' RICHIESTA 7
 
-> lista richieste acquisto, approvate ma non ancora spedite, associate ad uno specifico tecnico
+> lista richieste acquisto, approvate ma non ancora spedite, associate ad uno specifico tecnico.
 > Vengono selezionati i dati fondamentali della richiesta d'acquisto e i dati che identificano i prodotti ad esse associate. 
 
 ```sql
@@ -648,7 +636,7 @@ call DettagliRichiestaAcquisto(1000);
 
 #### FUNZIONALITA' RICHIESTA 9
 
-> conteggio richieste d'acquisto gestite globalmente da un determinato tecnico
+> conteggio di tutte le richieste d'acquisto gestite globalmente da un determinato tecnico.
 
 ```sql
 DELIMITER //
@@ -683,7 +671,7 @@ CALL NRGTecnico(2);
 
 #### FUNZIONALITA' RICHIESTA 10
 
-> calcolo della spesa totale effettuata da un ordinante in un anno solare
+> calcolo della spesa totale effettuata da un determinato ordinante in un anno solare.
 
 ```sql
 DELIMITER //
@@ -723,7 +711,7 @@ CALL CalcoloSommaOrdinante(1);
 
 #### FUNZIONALITA' RICHIESTA 11
 
-> calcolo del tempo medio evasione ordine
+> calcolo del tempo medio di evasione di un ordine
 > Il tempo medio viene calcolato mediante "data" e "spedito il" che rappresentano rispettivamente la data di creazione della richiesta d'acquisto e il momento della spedizione del prodotto
 
 ```sql
@@ -748,7 +736,7 @@ select * FROM richiesta_acquisto;
 
 #### FUNZIONALITA' EXTRA 1
 
-> Procedura per la registrazione di una proposta per un prodotto candidato
+> Procedura per la presentazione di un prodotto candidato ad una richiesta d'acquisto.
 
 ```sql
 DELIMITER //
@@ -782,7 +770,7 @@ SELECT * FROM associa;
 
 #### FUNZIONALITA' EXTRA 2
 
-> procedura per la spedizione del prodotto
+> procedura per segnalare l'avvenuta spedizione di un prodotto
 
 ```sql
 DELIMITER // 
@@ -805,7 +793,7 @@ SELECT * FROM richiesta_acquisto;
 
 #### FUNZIONALITA' EXTRA 3
 
-> rifiuto del prodotto da parte del compratore
+> rifiuto di un prodotto proposto da parte del compratore
 
 ```sql
 DELIMITER //
@@ -832,7 +820,7 @@ SELECT * FROM richiesta_acquisto;
 #### FUNZIONALITA' EXTRA 4 
 
 > inserisci prodotto
-> Procedura usata dall tecnico per inserire il prodotto trovato nel sistema
+> Procedura usata dal tecnico per inserire il prodotto trovato nel sistema
 
 ```sql
 DELIMITER //
