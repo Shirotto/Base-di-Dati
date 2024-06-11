@@ -813,7 +813,6 @@ SELECT * FROM richiesta_acquisto;
 
 #### FUNZIONALITA' EXTRA 4 
 
-> inserisci prodotto
 > Procedura usata dal tecnico per inserire il prodotto trovato nel sistema
 
 ```sql
