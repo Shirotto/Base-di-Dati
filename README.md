@@ -133,17 +133,9 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 ### Implementazione del modello relazionale
 
-
-### Implementazione dei vincoli
-
-
-### Implementazione funzionalità richieste
-
-
-
 #### BASE DI DATI
 
-> Query di generazione tabelle
+> Creazione Database
 
 ```sql
 DROP DATABASE IF EXISTS market;
@@ -253,7 +245,9 @@ CREATE TABLE associa (
         
     PRIMARY KEY (ID_categoria , ID_specifica)
 );
-
+```
+#### INSERT DATI PER TEST
+```sql
 INSERT INTO categoria(nome) VALUES ('PERSONAL COMPUTER');
 INSERT INTO categoria(nome) VALUES ('COMPUTER FISSI');
 INSERT INTO categoria(nome) VALUES ('COMPUTER DA GAMING');
@@ -274,6 +268,13 @@ INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Paolo','
 INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Zeb','Ottantanove','Malta','Zebbone@emdem.com','1763489654','utente');
 INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Pietro','Smusi','Via dello sdunzo','Pietrosmusi@fdfdfd.it','947921314','tecnico');
 ```
+
+
+### Implementazione dei vincoli
+
+
+### Implementazione funzionalità richieste
+
 
 #### FUNZIONALITA' RICHIESTA 1
 
