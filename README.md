@@ -11,9 +11,6 @@
 **Data di consegna del progetto**: gg/mm/aaaa
 
 ## Analisi dei requisiti
-
-- E' possibile riportare in questa sezione i **requisiti **copiati dal documento di specifica, oppure semplicemente riassumerne gli aspetti più importanti.
-  Vanno quindi (eventualmente) discusse tutte le scelte progettuali relative al dominio, le ambiguità e il modo in cui sono state risolte.
   
 - Definizione della richiesta di acquisto. L’ordinante dovrà selezionare una categoria (ad esempio PC Desktop, Notebook, Scrivania,...) che identifichi la tipologia di prodotto da acquistare tra quelle note al sistema (opzionalmente le categorie potranno avere una struttura ad albero, ad esempio Informatica > Computer > Notebook). Ogni categoria di prodotto avrà associate una serie di caratteristiche specifiche (ad esempio quantità di RAM e tipo di CPU per un PC, ecc.), sempre definite nel sistema ed eventualmente aggiornabili. L'ordinante, per completare la propria richiesta di acquisito, dovrà quindi inserire i valori di tutte le caratteristiche desiderate relative alla categoria di prodotto selezionata (per ogni caratteristica sarà comunque sempre prevista l'opzione indifferente). Sarà presente anche uno spazio note per aggiungere ogni caratteristica peculiare non annoverata tra quelle standard.
 
@@ -109,9 +106,6 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 ![Diagramma ER](https://github.com/Shirotto/Base-di-Dati/assets/127602582/d0a40361-c8a9-4242-af0f-43292b388f70)
 
-
-
-- Commentate gli elementi non visibili nella figura (ad esempio il contenuto degli attributi composti) nonché le scelte/assunzioni che vi hanno portato a creare determinate strutture, se lo ritenete opportuno.
 - RICHIESTA D'ACQUISTO: Presumiamo che la richiesta d'acquisto possa contenere la richiesta di un singolo prodotto.
 - PRODOTTO CANDIDATO: Il prodotto candidato per una richiesta d'acquisto sarà uno solo, ma riteniamo utile tenere conto di tutte le proposte rifiutate per quella richiesta d'acquisto. Per questo "prodottto candidato" tiene conto del fatto di essere stato rifiutato o meno. I prodotti rifiutati verranno registrati in una lista apposita e poi rimossi una volta chiusa la richiesta a cui sono associati.
 - CATEGORIA: Le categorie presentano una struttura ad albero.
@@ -142,7 +136,6 @@ La "Specifica" rappresenta le caratteristiche dei prodotti. Attraverso la "Speci
 
 ### Implementazione dei vincoli
 
-- Nel caso abbiate individuato dei **vincoli ulteriori** che non sono esprimibili nel DDL, potrete usare questa sezione per discuterne l'implementazione effettiva, ad esempio riportando il codice di procedure o trigger, o dichiarando che dovranno essere implementati all'esterno del DBMS.
 
 ### Implementazione funzionalità richieste
 
