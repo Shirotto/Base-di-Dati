@@ -444,56 +444,6 @@ SELECT * FROM associa;
 SET SQL_SAFE_UPDATES = 1;
 ```
 
-#### Funzionalità 6 EXTRA
-
-> spedisci prodotto
-
-```sql
-DELIMITER // 
-
-CREATE PROCEDURE SpedisciProdotto(
-   IN richiestaID INT
-)
-BEGIN
-    
-    UPDATE propone SET stato = 'ordinato' WHERE ID_richiesta_acquisto = richiestaID;
-    UPDATE richiesta_acquisto SET spedito_il = NOW() WHERE ID = richiestaID;
-
-END //
-
-DELIMITER ;
-CALL SpedisciProdotto(1000);
-SELECT * FROM propone;
-SELECT * FROM richiesta_acquisto;
-
-#### Funzionalità 3 EXTRA
-
-> inserisci prodotto
-
-```sql
--- Procedura usata dall tecnico per inserire il prodotto trovato nel sistema
-DELIMITER //
-CREATE PROCEDURE CercaProdotto(
-IN nome_prodotto VARCHAR(100),
-IN nome_produttore VARCHAR(100), 
-IN codice_prodotto INT, 
-IN url_prodotto VARCHAR(100),
-IN note VARCHAR(100),
-IN prezzo INT
-)
-BEGIN 
-
-INSERT INTO prodotto_candidato(nome_prodotto,nome_produttore,codice_prodotto,URL_info,note,prezzo) VALUES (nome_prodotto,nome_produttore,codice_prodotto,url_prodotto,note,prezzo);
-
-END //
-DELIMITER ;
-
-CALL CercaProdotto('asis notebook','asis company',1,'www.asis','tastiera colorata',1080);
-CALL CercaProdotto('applo notebook','applo company',2,'www.indirizzo','telecamera',2000);
-CALL CercaProdotto('pera phone','pera inc',3,'www.pera','dedica',750);
-SELECT * FROM prodotto_candidato;
-
-```
 
 #### FUNZIONALITA' RICHIESTA 5
 
