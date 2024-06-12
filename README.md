@@ -8,7 +8,7 @@
 |     285714      |    Mario  |      Ranalli   |  Implementazione, in particolare le procedure 3,6,9 ed la extra 3, e stesura della documentazione      |
 |     265332     |    Marco  |      Nicolella   |    Progettazione concettuale e implementazione, in particolare le procedure 2,5,8,11        |
 
-**Data di consegna del progetto**: gg/mm/aaaa
+**Data di consegna del progetto**: 12/06/2024
 
 ## Analisi dei requisiti
   
