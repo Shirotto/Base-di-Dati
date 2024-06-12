@@ -278,7 +278,7 @@ INSERT INTO utente(nome,cognome,indirizzo,email,telefono,tipo) VALUES ('Pietro',
 
 #### FUNZIONALITA' RICHIESTA 1
 
-> Creazione richiesta d'acquisto
+> Procedura per la creazione richiesta d'acquisto
 
 ```sql
 DELIMITER //
@@ -339,7 +339,7 @@ WHERE
 
 #### FUNZIONALITA' RICHIESTA 2
 
-> assegna tecnico
+> Assegna tecnico alla richiesta d'acquisto 
 
 ```sql
 create view Tecnici as    
@@ -386,7 +386,7 @@ SELECT * FROM richiesta_acquisto;
 ```
 #### FUNZIONALITA' RICHIESTA 3
 
-> approva prodotto
+> Approvazione prodotto candidato da parte dell'utente
 
 ```sql
 DELIMITER // 
@@ -407,7 +407,7 @@ SELECT * FROM richiesta_acquisto;
 ```
 #### FUNZONALITA' RICHIESTA 4
 
-> elimina richiesta d'acquisto
+> Eliminazioe richiesta d'acquisto con conseguente eliminazione dei dati da tutte le tabelle collegate
 
 ```sql
 SET SQL_SAFE_UPDATES = 0;
@@ -496,7 +496,7 @@ SELECT * FROM prodotto_candidato;
 
 #### FUNZIONALITA' RICHIESTA 5
 
-> richieste di un ordinante in sospeso
+> Richiesta d'acquisto non ancora conclusa
 
 ```sql
 DELIMITER //
@@ -517,7 +517,7 @@ CALL RANC_Ordinante(6);
 
 #### FUNZIONALITA' RICHIESTA 6
 
-> lista richieste d'acquisto non ancora associate a nessun tecnico
+>  Estrazione lista richieste d'acquisto non ancora associate a nessun tecnico
 
 ```sql
 DELIMITER //
